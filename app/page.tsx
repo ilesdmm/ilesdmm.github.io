@@ -4,6 +4,14 @@ import { useState } from "react";
 
 const projects = [
   {
+    id: "Qrjb1roJoBU",
+    title: "Boss Fight + Parry System",
+    eyebrow: "Combat / Boss AI",
+    description:
+      "A complete boss encounter built around responsive parry timing and readable combat flow. This system demonstrates boss attack logic, defensive timing windows, combat feedback, and the encounter design needed to make a high-stakes fight feel fair and satisfying.",
+    skills: ["Boss encounters", "Parry mechanics", "Combat feedback"],
+  },
+  {
     id: "tc7lUxgfz0Q",
     title: "Data Saving System + Inventory System",
     eyebrow: "Persistence / Inventory",
@@ -159,7 +167,7 @@ export default function Home() {
         <div className="hero-panel" aria-label="Portfolio overview">
           <div className="panel-status"><span /> Available for new projects</div>
           <div className="hero-stat">
-            <strong>11</strong>
+            <strong>12</strong>
             <span>systems showcased</span>
           </div>
           <div className="panel-line" />
@@ -195,7 +203,7 @@ export default function Home() {
             <h2>PROVEN SYSTEMS.<br /><em>REAL GAMEPLAY.</em></h2>
           </div>
           <p>
-            Eleven working systems demonstrating the architecture, game logic,
+            Twelve working systems demonstrating the architecture, game logic,
             and player-focused thinking I bring to Roblox projects.
           </p>
         </div>

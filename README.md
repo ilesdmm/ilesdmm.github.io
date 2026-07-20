@@ -2,7 +2,7 @@
 
 The source for my public Roblox development portfolio: **[ilesdmm.github.io](https://ilesdmm.github.io/)**.
 
-The portfolio showcases 11 working Roblox systems, including persistent data and inventories, vehicles, quests and economies, modular NPC AI, player movement, loot systems, weighted RNG, round management, rebirth progression, pets, and helicopter flight controls.
+The portfolio showcases 12 working Roblox systems, including boss fights and parry combat, persistent data and inventories, vehicles, quests and economies, modular NPC AI, player movement, loot systems, weighted RNG, round management, rebirth progression, pets, and helicopter flight controls.
 
 ## Contact
 
