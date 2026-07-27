@@ -99,6 +99,14 @@ const projects = [
       "A reusable helicopter controller built around responsive flight input and stable vehicle behavior. It showcases advanced vehicle scripting, coordinated movement logic, and a framework that can support multiple aircraft.",
     skills: ["Flight controls", "Vehicle physics", "Framework design"],
   },
+  {
+    id: "0Tv6my4FM0w",
+    title: "Scalable & Functionable Inventory UI Framework",
+    eyebrow: "Inventory / UI",
+    description:
+      "A scalable inventory interface designed to keep item management clear, responsive, and easy to extend. This framework demonstrates reusable UI architecture, organized inventory interactions, and a polished player-facing flow built for growing game systems.",
+    skills: ["Inventory UI", "Scalable interface", "Interaction design"],
+  },
 ] as const;
 
 const services = [
@@ -167,7 +175,7 @@ export default function Home() {
         <div className="hero-panel" aria-label="Portfolio overview">
           <div className="panel-status"><span /> Available for new projects</div>
           <div className="hero-stat">
-            <strong>12</strong>
+            <strong>{projects.length}</strong>
             <span>systems showcased</span>
           </div>
           <div className="panel-line" />
@@ -203,7 +211,7 @@ export default function Home() {
             <h2>PROVEN SYSTEMS.<br /><em>REAL GAMEPLAY.</em></h2>
           </div>
           <p>
-            Twelve working systems demonstrating the architecture, game logic,
+            Thirteen working systems demonstrating the architecture, game logic,
             and player-focused thinking I bring to Roblox projects.
           </p>
         </div>
