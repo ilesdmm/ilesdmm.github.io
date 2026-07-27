@@ -20,6 +20,14 @@ const projects = [
     skills: ["Data persistence", "Inventory architecture", "Client/server sync"],
   },
   {
+    id: "0Tv6my4FM0w",
+    title: "Scalable & Functionable Inventory UI Framework",
+    eyebrow: "Inventory / UI",
+    description:
+      "A scalable inventory interface designed to keep item management clear, responsive, and easy to extend. This framework demonstrates reusable UI architecture, organized inventory interactions, and a polished player-facing flow built for growing game systems.",
+    skills: ["Inventory UI", "Scalable interface", "Interaction design"],
+  },
+  {
     id: "nNdAh53DC7M",
     title: "Working Vehicle + Gear Framework",
     eyebrow: "Vehicles / Equipment",
@@ -98,14 +106,6 @@ const projects = [
     description:
       "A reusable helicopter controller built around responsive flight input and stable vehicle behavior. It showcases advanced vehicle scripting, coordinated movement logic, and a framework that can support multiple aircraft.",
     skills: ["Flight controls", "Vehicle physics", "Framework design"],
-  },
-  {
-    id: "0Tv6my4FM0w",
-    title: "Scalable & Functionable Inventory UI Framework",
-    eyebrow: "Inventory / UI",
-    description:
-      "A scalable inventory interface designed to keep item management clear, responsive, and easy to extend. This framework demonstrates reusable UI architecture, organized inventory interactions, and a polished player-facing flow built for growing game systems.",
-    skills: ["Inventory UI", "Scalable interface", "Interaction design"],
   },
 ] as const;
 
