@@ -1,349 +1,284 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-type Project = {
-  id: string;
-  title: string;
-  eyebrow: string;
-  description: string;
-  skills: string[];
-  featured?: boolean;
-};
-
-const projects: Project[] = [
+const featuredProjects = [
   {
-    id: "uxHYi6nJZbA",
+    number: "01",
     title: "DeadShot Project",
-    eyebrow: "Most recent commission",
+    category: "Commissioned solo build",
     description:
-      "This project was created entirely by me as a commissioned solo developer. I handled everything shown in the video, including the scripting, animations, UI, gameplay systems, and both front-end and back-end development. Unfortunately, the project was discontinued after the client’s budget ran out, but everything shown represents work I personally created.",
-    skills: ["Solo development", "Scripting & systems", "UI & animation", "Front-end / back-end"],
-    featured: true,
+      "A complete commissioned experience built end to end—from systems and animation to UI, gameplay, and both sides of the stack.",
+    skills: ["Solo development", "Gameplay systems", "UI + animation"],
+    video: "uxHYi6nJZbA",
+    accent: "red",
   },
   {
-    id: "RguPZ3K_T94",
-    title: "Scalable Egg RNG System",
-    eyebrow: "Pets / RNG / Collection",
+    number: "02",
+    title: "Scalable Egg RNG",
+    category: "Pets · RNG · Collection",
     description:
-      "A fully self-made egg and reward framework built for scalable collection gameplay. It combines weighted rarity rolls, responsive hatching presentation, collection state, and clean system architecture that can grow with a live Roblox experience.",
-    skills: ["Weighted RNG", "Egg hatching", "Collection systems"],
+      "A weighted reward framework with responsive hatching, persistent collection state, and architecture built to grow with a live game.",
+    skills: ["Weighted RNG", "Collection state", "Scalable modules"],
+    video: "RguPZ3K_T94",
+    accent: "dark",
   },
   {
-    id: "Qrjb1roJoBU",
-    title: "Boss Fight + Parry System",
-    eyebrow: "Combat / Boss AI",
+    number: "03",
+    title: "Boss Fight + Parry",
+    category: "Combat · Boss AI",
     description:
-      "A complete boss encounter built around responsive parry timing and readable combat flow. This system demonstrates boss attack logic, defensive timing windows, combat feedback, and the encounter design needed to make a high-stakes fight feel fair and satisfying.",
-    skills: ["Boss encounters", "Parry mechanics", "Combat feedback"],
+      "A high-stakes encounter focused on readable attack logic, precise parry windows, combat feedback, and a fair player experience.",
+    skills: ["Boss logic", "Parry timing", "Combat feedback"],
+    video: "Qrjb1roJoBU",
+    accent: "dark",
   },
   {
-    id: "tc7lUxgfz0Q",
-    title: "Data Saving System + Inventory System",
-    eyebrow: "Persistence / Inventory",
+    number: "04",
+    title: "Inventory + Data",
+    category: "Persistence · Inventory",
     description:
-      "A dependable player-data foundation paired with a structured inventory flow. This project demonstrates clean data organization, reliable saving and loading, and synchronized item state built for games that need long-term progression.",
-    skills: ["Data persistence", "Inventory architecture", "Client/server sync"],
+      "A dependable player-data foundation with structured inventory state, reliable saves, and clean client/server synchronization.",
+    skills: ["Data persistence", "Inventory architecture", "State sync"],
+    video: "tc7lUxgfz0Q",
+    accent: "red",
   },
   {
-    id: "0Tv6my4FM0w",
-    title: "Scalable & Functionable Inventory UI Framework",
-    eyebrow: "Inventory / UI",
+    number: "05",
+    title: "Modular AI + Aggro",
+    category: "AI · Combat",
     description:
-      "A scalable inventory interface designed to keep item management clear, responsive, and easy to extend. This framework demonstrates reusable UI architecture, organized inventory interactions, and a polished player-facing flow built for growing game systems.",
-    skills: ["Inventory UI", "Scalable interface", "Interaction design"],
+      "Reusable NPC intelligence with target detection, aggro behavior, state-driven decisions, and an extensible enemy framework.",
+    skills: ["NPC states", "Aggro targeting", "Modular AI"],
+    video: "xcOu7b0e5jM",
+    accent: "dark",
   },
   {
-    id: "nNdAh53DC7M",
-    title: "Working Vehicle + Gear Framework",
-    eyebrow: "Vehicles / Equipment",
+    number: "06",
+    title: "Vehicle + Gear",
+    category: "Vehicles · Equipment",
     description:
-      "A reusable framework for drivable vehicles and functional gear. It highlights modular gameplay architecture, responsive controls, equipment state handling, and systems that can be expanded without rebuilding the foundation.",
+      "A reusable foundation for responsive vehicles and functional gear with modular controls and reliable equipment state.",
     skills: ["Vehicle systems", "Gear framework", "Reusable modules"],
-  },
-  {
-    id: "hCqlQ7YgMXs",
-    title: "Dynamic Quest + Money Framework",
-    eyebrow: "Quests / Economy",
-    description:
-      "A configurable quest and currency loop that tracks objectives, rewards players, and updates progression dynamically. It showcases economy design, event-driven logic, and flexible content systems for repeatable gameplay.",
-    skills: ["Quest progression", "Currency systems", "Reward logic"],
-  },
-  {
-    id: "xcOu7b0e5jM",
-    title: "Modular AI + Aggro System Framework",
-    eyebrow: "AI / Combat",
-    description:
-      "A modular NPC framework with target detection and aggro behavior. This build demonstrates state-based AI, reusable enemy logic, combat targeting, and an architecture designed for adding new behaviors efficiently.",
-    skills: ["NPC state logic", "Aggro targeting", "Modular AI"],
-  },
-  {
-    id: "ke1Bhn0ZGGc",
-    title: "Player Movement System",
-    eyebrow: "Movement / Character",
-    description:
-      "A responsive custom movement controller focused on player feel. The system demonstrates character-state management, input handling, movement transitions, and the polish required to make moment-to-moment gameplay feel intentional.",
-    skills: ["Character controller", "Input handling", "Movement states"],
-  },
-  {
-    id: "cZyyWepvBCc",
-    title: "Looting + Accessory + Backpack System",
-    eyebrow: "Loot / Equipment",
-    description:
-      "An interconnected item flow covering world looting, accessories, and backpack management. It advertises strong system integration: collecting items, equipping them, updating inventory state, and keeping the player experience consistent.",
-    skills: ["Loot interactions", "Equipment logic", "Backpack flow"],
-  },
-  {
-    id: "UGyoDSMMh-4",
-    title: "Chest + RNG System",
-    eyebrow: "Rewards / RNG",
-    description:
-      "A chest-opening system powered by weighted random rewards and rarity tiers. This project shows probability design, reward-table organization, server-authoritative outcomes, and a satisfying progression hook.",
-    skills: ["Weighted RNG", "Rarity tables", "Reward systems"],
-  },
-  {
-    id: "coa5FW_ExA8",
-    title: "Round System Manager",
-    eyebrow: "Rounds / Game Flow",
-    description:
-      "A complete match lifecycle controller that moves players through waiting, active rounds, results, and resets. It demonstrates timers, state-machine thinking, player orchestration, and reliable cleanup between sessions.",
-    skills: ["Match lifecycle", "State management", "Round cleanup"],
-  },
-  {
-    id: "m_zlT-_N4i4",
-    title: "Progressive Rebirth System",
-    eyebrow: "Progression / Prestige",
-    description:
-      "A scalable rebirth loop with progressive requirements and meaningful rewards. It highlights long-term progression design, multiplier logic, persistent growth, and balancing-friendly configuration.",
-    skills: ["Progression loops", "Scaling formulas", "Persistent upgrades"],
-  },
-  {
-    id: "3amMD4wfaNc",
-    title: "Helicopter Framework",
-    eyebrow: "Flight / Vehicles",
-    description:
-      "A reusable helicopter controller built around responsive flight input and stable vehicle behavior. It showcases advanced vehicle scripting, coordinated movement logic, and a framework that can support multiple aircraft.",
-    skills: ["Flight controls", "Vehicle physics", "Framework design"],
+    video: "nNdAh53DC7M",
+    accent: "red",
   },
 ];
 
-const services = [
-  "Gameplay systems",
-  "Persistent data",
-  "AI & NPC logic",
-  "Economy design",
-  "Vehicle frameworks",
+const archive = [
+  ["07", "Inventory UI Framework", "Inventory · UI", "0Tv6my4FM0w"],
+  ["08", "Quest + Money Framework", "Quests · Economy", "hCqlQ7YgMXs"],
+  ["09", "Player Movement System", "Movement · Character", "ke1Bhn0ZGGc"],
+  ["10", "Looting + Backpack", "Loot · Equipment", "cZyyWepvBCc"],
+  ["11", "Chest + RNG System", "Rewards · RNG", "UGyoDSMMh-4"],
+  ["12", "Round System Manager", "Rounds · Game flow", "coa5FW_ExA8"],
+  ["13", "Progressive Rebirth", "Progression · Prestige", "m_zlT-_N4i4"],
+  ["14", "Helicopter Framework", "Flight · Vehicles", "3amMD4wfaNc"],
+];
+
+const capabilities = [
+  ["01", "Gameplay systems", "Combat, movement, quests, rounds, rewards and the moment-to-moment logic players feel."],
+  ["02", "Persistent data", "Reliable player profiles, inventories, progression and secure client/server synchronization."],
+  ["03", "AI + NPC logic", "State-driven enemies, targeting, aggro behavior and reusable decision frameworks."],
+  ["04", "Economy design", "Currencies, weighted rewards, rebirth loops and systems tuned for long-term play."],
+  ["05", "Vehicle frameworks", "Responsive ground and air vehicles built around stable, extensible control systems."],
 ];
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
 
-  const copyDiscord = async () => {
-    try {
-      await navigator.clipboard.writeText("renolicious");
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
-    } catch {
-      setCopied(false);
-    }
-  };
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("is-visible");
+        });
+      },
+      { threshold: 0.12 },
+    );
+
+    document.querySelectorAll("[data-reveal]").forEach((element) => observer.observe(element));
+
+    const updateProgress = () => {
+      const available = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = available > 0 ? (window.scrollY / available) * 100 : 0;
+      document.documentElement.style.setProperty("--scroll-progress", `${progress}%`);
+    };
+
+    updateProgress();
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", updateProgress);
+    };
+  }, []);
+
+  async function copyDiscord() {
+    await navigator.clipboard.writeText("renolicious");
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1800);
+  }
 
   return (
-    <main>
+    <main id="top">
+      <div className="scroll-progress" aria-hidden="true" />
+
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Renolicious home">
-          <span className="wordmark-mark">R</span>
+        <a className="brand" href="#top" aria-label="Renolicious home">
+          <span className="brand-mark">R</span>
           <span>RENOLICIOUS</span>
         </a>
         <nav aria-label="Main navigation">
           <a href="#work">Work</a>
-          <a href="#services">Skills</a>
+          <a href="#capabilities">Skills</a>
           <a href="#contact">Contact</a>
         </nav>
         <a className="header-cta" href="#contact">
-          Hire me <span aria-hidden="true">↗</span>
+          Start a project <span>↗</span>
         </a>
       </header>
 
-      <section className="hero" id="top">
+      <section className="hero" aria-labelledby="hero-title">
         <div className="hero-grid" aria-hidden="true" />
-        <div className="hero-orbit hero-orbit-one" aria-hidden="true" />
-        <div className="hero-orbit hero-orbit-two" aria-hidden="true" />
-
-        <div className="hero-copy">
-          <p className="kicker"><span /> Roblox systems developer</p>
-          <h1>
-            ROBLOX
-            <span>SYSTEMS.</span>
-            BUILT TO SCALE.
-          </h1>
-          <p className="hero-intro">
-            I build reliable, modular Roblox gameplay systems—from persistent
-            inventories and AI to vehicles, progression, and full game loops.
+        <div className="hero-glow" aria-hidden="true" />
+        <div className="hero-topline">
+          <span className="eyebrow"><i /> Roblox systems developer</span>
+          <span className="hero-index">Portfolio / 2026</span>
+        </div>
+        <h1 id="hero-title">
+          <span>I BUILD THE</span>
+          <span className="outline">SYSTEMS BEHIND</span>
+          <span>GREAT GAMES.</span>
+        </h1>
+        <div className="hero-bottom">
+          <p>
+            Modular Roblox systems engineered for performance, scale, and the kind of gameplay players come back to.
           </p>
           <div className="hero-actions">
-            <a className="primary-button" href="#work">
-              Explore my work <span aria-hidden="true">↓</span>
-            </a>
-            <a className="text-link" href="#contact">Available for commissions ↗</a>
+            <a className="button button-primary" href="#work">Explore the work <span>↓</span></a>
+            <a className="text-link" href="#contact">Available for commissions <span>↗</span></a>
           </div>
         </div>
-
-        <div className="hero-panel" aria-label="Portfolio overview">
-          <div className="panel-status"><span /> Available for new projects</div>
-          <div className="hero-stat">
-            <strong>{projects.length}</strong>
-            <span>systems showcased</span>
-          </div>
-          <div className="panel-line" />
-          <div className="panel-meta">
-            <span>Focus</span>
-            <strong>Roblox / Luau</strong>
-          </div>
-          <div className="panel-meta">
-            <span>Specialty</span>
-            <strong>Scalable frameworks</strong>
-          </div>
-        </div>
-
-        <a className="scroll-cue" href="#work" aria-label="Scroll to selected work">
-          <span>Scroll to work</span>
-          <i aria-hidden="true">↓</i>
-        </a>
-      </section>
-
-      <section className="services-strip" id="services" aria-label="Services">
-        <p>Capabilities</p>
-        <div className="service-list">
-          {services.map((service) => (
-            <span key={service}>{service}</span>
-          ))}
+        <div className="hero-stats" aria-label="Portfolio overview">
+          <div><strong>14</strong><span>Systems<br />showcased</span></div>
+          <div><strong>100%</strong><span>Custom<br />Luau work</span></div>
+          <div><strong>FULL</strong><span>Stack Roblox<br />development</span></div>
+          <div className="hero-scroll"><span>Scroll to enter</span><b>↓</b></div>
         </div>
       </section>
 
-      <section className="creator-proof" aria-labelledby="creator-proof-title">
-        <div className="proof-copy">
-          <p className="kicker"><span /> Verified Roblox creator</p>
-          <h2 id="creator-proof-title">A REAL ACCOUNT.<br /><em>REAL WORK.</em></h2>
-          <p>
-            My portfolio is backed by active Roblox development experience and a
-            real creator account. This profile snapshot connects the work to the
-            account behind it—clear, direct, and verifiable.
-          </p>
-          <div className="proof-stats" aria-label="Roblox account details">
-            <div><span>Profile</span><strong>stinkybumgamer</strong></div>
-            <div><span>Robux shown</span><strong>23,428</strong></div>
-          </div>
+      <section className="ticker" aria-label="Core disciplines">
+        <div className="ticker-track">
+          <span>GAMEPLAY SYSTEMS</span><i>◆</i><span>MODULAR LUAU</span><i>◆</i><span>AI FRAMEWORKS</span><i>◆</i><span>PLAYER DATA</span><i>◆</i><span>GAMEPLAY SYSTEMS</span><i>◆</i><span>MODULAR LUAU</span><i>◆</i>
         </div>
-        <figure className="proof-visual">
-          <div className="proof-label">Account snapshot</div>
-          <div
-            className="proof-image-frame"
-            role="img"
-            aria-label="Roblox account header showing the stinkybumgamer profile and a balance of 23,428 Robux"
-          />
-          <figcaption>Roblox creator profile · captured account balance</figcaption>
-        </figure>
       </section>
 
-      <section className="work-section" id="work">
-        <div className="section-heading">
+      <section className="intro section-shell" data-reveal>
+        <div>
+          <span className="section-label">01 / Profile</span>
+        </div>
+        <div className="intro-copy">
+          <p className="display-copy">I turn ambitious Roblox ideas into <em>clean, reliable systems.</em></p>
+          <div className="intro-meta">
+            <p>From a single gameplay mechanic to a connected framework, every build is structured to be readable, secure, and ready to expand.</p>
+            <div className="verified"><span>●</span><div><small>Verified creator</small><strong>stinkybumgamer</strong></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section className="work" id="work">
+        <div className="section-heading section-shell" data-reveal>
+          <span className="section-label">02 / Selected work</span>
           <div>
-            <p className="kicker"><span /> Selected work</p>
             <h2>PROVEN SYSTEMS.<br /><em>REAL GAMEPLAY.</em></h2>
+            <p>Six featured builds. Fourteen systems in total. Every one made to solve a real gameplay problem.</p>
           </div>
-          <p>
-            Fourteen working systems demonstrating the architecture, game logic,
-            and player-focused thinking I bring to Roblox projects.
-          </p>
         </div>
 
         <div className="project-list">
-          {projects.map((project, index) => (
-            <article className={`project-card${project.featured ? " featured-project" : ""}`} key={project.id}>
-              <div className="video-shell">
-                <div className="video-topline">
-                  <span>PROJECT / {String(index + 1).padStart(2, "0")}</span>
-                  <span>WATCH DEMO</span>
-                </div>
-                <div className="video-frame">
-                  <iframe
-                    src={`https://www.youtube-nocookie.com/embed/${project.id}?rel=0&modestbranding=1`}
-                    title={`${project.title} video demonstration`}
-                    loading="lazy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerPolicy="strict-origin-when-cross-origin"
-                    allowFullScreen
-                  />
-                </div>
-              </div>
-
-              <div className="project-copy">
-                <div className="project-number">{String(index + 1).padStart(2, "0")}</div>
-                {project.featured && <p className="featured-badge">Newest · commissioned solo build</p>}
-                <p className="project-eyebrow">{project.eyebrow}</p>
+          {featuredProjects.map((project) => (
+            <article className={`project project-${project.accent}`} key={project.number} data-reveal>
+              <a className="project-media" href={`https://youtu.be/${project.video}`} target="_blank" rel="noreferrer" aria-label={`Watch ${project.title} on YouTube`}>
+                <img src={`https://i.ytimg.com/vi/${project.video}/maxresdefault.jpg`} alt="" />
+                <span className="media-shade" />
+                <span className="play-button">PLAY <b>↗</b></span>
+                <span className="project-number">/{project.number}</span>
+              </a>
+              <div className="project-content">
+                <p className="project-category">{project.category}</p>
                 <h3>{project.title}</h3>
                 <p className="project-description">{project.description}</p>
-                <ul className="skill-tags" aria-label="Skills demonstrated">
+                <ul aria-label="Skills demonstrated">
                   {project.skills.map((skill) => <li key={skill}>{skill}</li>)}
                 </ul>
-                <a
-                  className="watch-link"
-                  href={`https://youtu.be/${project.id}`}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  View on YouTube <span aria-hidden="true">↗</span>
-                </a>
+                <a className="project-link" href={`https://youtu.be/${project.video}`} target="_blank" rel="noreferrer">Watch case study <span>↗</span></a>
               </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="archive section-shell" data-reveal>
+          <div className="archive-heading">
+            <span className="section-label">More systems / 07—14</span>
+            <p>Eight more builds across UI, progression, movement, rewards, and vehicles.</p>
+          </div>
+          <div className="archive-list">
+            {archive.map(([number, title, category, video]) => (
+              <a key={number} href={`https://youtu.be/${video}`} target="_blank" rel="noreferrer">
+                <span>{number}</span><strong>{title}</strong><em>{category}</em><b>↗</b>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="capabilities" id="capabilities">
+        <div className="capability-title section-shell" data-reveal>
+          <span className="section-label section-label-light">03 / Capabilities</span>
+          <h2>BUILT TO<br /><span>DO MORE.</span></h2>
+        </div>
+        <div className="capability-list section-shell">
+          {capabilities.map(([number, title, description]) => (
+            <article key={number} data-reveal>
+              <span>{number}</span>
+              <h3>{title}</h3>
+              <p>{description}</p>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="hire-process" aria-labelledby="hire-title">
-        <div>
-          <p className="kicker"><span /> Simple process</p>
-          <h2 id="hire-title">FROM BRIEF<br />TO <em>BUILD.</em></h2>
+      <section className="process section-shell" data-reveal>
+        <div className="process-heading">
+          <span className="section-label">04 / Process</span>
+          <h2>FROM BRIEF<br />TO BUILD.</h2>
         </div>
         <ol>
-          <li><span>01</span><div><strong>Send the scope</strong><p>Tell me what system you need, your game genre, timeline, and any references.</p></div></li>
-          <li><span>02</span><div><strong>Plan the framework</strong><p>We align on features, milestones, and how the system fits your existing game.</p></div></li>
-          <li><span>03</span><div><strong>Build & deliver</strong><p>I create the system, test the core flow, and provide a clean handoff.</p></div></li>
+          <li><span>01</span><div><strong>Send the scope</strong><p>Share the system, game genre, timeline, budget, and any useful references.</p></div></li>
+          <li><span>02</span><div><strong>Plan the framework</strong><p>We align on the architecture, milestones, and fit with your existing game.</p></div></li>
+          <li><span>03</span><div><strong>Build + deliver</strong><p>I develop the system, test the core flow, and provide a clean handoff.</p></div></li>
         </ol>
       </section>
 
-      <section className="contact-section" id="contact">
-        <div className="contact-glow" aria-hidden="true" />
-        <p className="kicker light"><span /> Let&apos;s build something</p>
-        <h2>HAVE A SYSTEM<br />IN MIND?</h2>
-        <p className="contact-lead">
-          I&apos;m available for Roblox scripting commissions, custom frameworks,
-          and gameplay-system development. The fastest way to reach me is Discord.
-        </p>
-
-        <div className="discord-card">
-          <div className="discord-icon" aria-hidden="true">#</div>
-          <div className="discord-details">
-            <span>Discord username</span>
-            <strong>renolicious</strong>
+      <section className="contact" id="contact">
+        <div className="contact-noise" aria-hidden="true" />
+        <div className="section-shell contact-inner" data-reveal>
+          <span className="section-label section-label-light">05 / Start a project</span>
+          <h2>LET&apos;S BUILD<br />SOMETHING<br /><em>SERIOUS.</em></h2>
+          <div className="contact-grid">
+            <p>Available for Roblox scripting commissions, custom frameworks, and gameplay-system development.</p>
+            <div className="discord-card">
+              <span>Discord username</span>
+              <strong>renolicious</strong>
+              <button type="button" onClick={copyDiscord}>{copied ? "Copied" : "Copy username"}</button>
+            </div>
+            <a className="contact-arrow" href="https://discord.com/app" target="_blank" rel="noreferrer" aria-label="Open Discord">↗</a>
           </div>
-          <button type="button" onClick={copyDiscord} aria-live="polite">
-            {copied ? "Copied!" : "Copy username"}
-          </button>
-          <a href="https://discord.com/app" target="_blank" rel="noreferrer">
-            Open Discord <span aria-hidden="true">↗</span>
-          </a>
         </div>
-
-        <p className="contact-note">When you message me, include your project idea, budget range, and ideal deadline.</p>
       </section>
 
       <footer>
-        <a className="wordmark" href="#top">
-          <span className="wordmark-mark">R</span>
-          <span>RENOLICIOUS</span>
-        </a>
+        <a className="brand" href="#top"><span className="brand-mark">R</span><span>RENOLICIOUS</span></a>
         <p>Roblox systems developer · Built for performance and scale.</p>
         <a href="#top">Back to top ↑</a>
       </footer>
