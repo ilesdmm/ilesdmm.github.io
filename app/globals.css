@@ -382,7 +382,7 @@ a:focus-visible {
   padding: 23px clamp(22px, 4.5vw, 78px);
   display: flex;
   align-items: center;
-  gap: clamp(24px, 2.8vw, 48px);
+  gap: clamp(25px, 4vw, 70px);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   background: #0a0909;
@@ -402,16 +402,16 @@ a:focus-visible {
   flex: 1;
   display: flex;
   justify-content: space-between;
-  gap: clamp(10px, 1.1vw, 18px);
+  gap: 20px;
   overflow: hidden;
 }
 
 .service-list span {
   display: inline-flex;
   align-items: center;
-  gap: clamp(10px, 0.9vw, 15px);
+  gap: 22px;
   color: #c2baba;
-  font-size: clamp(11px, 0.82vw, 14px);
+  font-size: clamp(12px, 1vw, 15px);
   font-weight: 800;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -421,10 +421,6 @@ a:focus-visible {
 .service-list span::after {
   content: "+";
   color: var(--red);
-}
-
-.service-list span:last-child::after {
-  display: none;
 }
 
 .work-section {
