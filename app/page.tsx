@@ -186,10 +186,44 @@ export default function Home() {
       </section>
 
       <section className="ticker" aria-label="Core disciplines">
-        <div className="ticker-track">
-          <span>GAMEPLAY SYSTEMS</span><i>◆</i><span>MODULAR LUAU</span><i>◆</i><span>AI FRAMEWORKS</span><i>◆</i><span>PLAYER DATA</span><i>◆</i><span>CORE SYSTEMS</span><i>◆</i>
-        </div>
-      </section>
+  <div className="ticker-track">
+
+    <div className="ticker-group">
+      <span>GAMEPLAY SYSTEMS</span>
+      <i>◆</i>
+
+      <span>MODULAR LUAU</span>
+      <i>◆</i>
+
+      <span>AI FRAMEWORKS</span>
+      <i>◆</i>
+
+      <span>PLAYER DATA</span>
+      <i>◆</i>
+
+      <span>CORE SYSTEMS</span>
+      <i>◆</i>
+    </div>
+
+    <div className="ticker-group" aria-hidden="true">
+      <span>GAMEPLAY SYSTEMS</span>
+      <i>◆</i>
+
+      <span>MODULAR LUAU</span>
+      <i>◆</i>
+
+      <span>AI FRAMEWORKS</span>
+      <i>◆</i>
+
+      <span>PLAYER DATA</span>
+      <i>◆</i>
+
+      <span>CORE SYSTEMS</span>
+      <i>◆</i>
+    </div>
+
+  </div>
+</section>
 
       <section className="intro section-shell" data-reveal>
         <div>
