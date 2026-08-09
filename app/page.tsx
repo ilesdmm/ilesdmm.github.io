@@ -15,7 +15,7 @@ const featuredProjects = [
   },
   {
     number: "02",
-    title: "Scalable Egg RNG",
+    title: "Pet Hatching & Collection System",
     category: "Pets · RNG · Collection",
     description:
       "A weighted reward framework with responsive hatching, persistent collection state, and architecture built to grow with a live game.",
