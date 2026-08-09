@@ -243,7 +243,6 @@ export default function Home() {
               src="/roblox-profile-proof.png"
               alt="Roblox account header showing the stinkybumgamer profile and a balance of 23,428 Robux"
             />
-            <span className="robux-balance-overlay" aria-hidden="true">23,428</span>
           </div>
           <figcaption>Roblox creator profile · captured account balance</figcaption>
         </figure>

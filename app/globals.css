@@ -1038,26 +1038,6 @@ footer > a:last-child {
   display: block;
 }
 
-.robux-balance-overlay {
-  position: absolute;
-  z-index: 2;
-  top: 5.5%;
-  right: 3.05%;
-  width: 4.25%;
-  height: 23%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  color: #f5f7fa;
-  background: #17181d;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(5px, 0.68vw, 12px);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.035em;
-  white-space: nowrap;
-}
-
 .proof-visual figcaption {
   position: relative;
   z-index: 1;
