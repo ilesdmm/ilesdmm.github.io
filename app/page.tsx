@@ -238,12 +238,11 @@ export default function Home() {
         </div>
         <figure className="proof-visual">
           <div className="proof-label">Account snapshot</div>
-          <div className="proof-image-frame">
-            <img
-              src="/roblox-profile-proof.png?v=23428"
-              alt="Roblox account header showing the stinkybumgamer profile and a balance of 23,428 Robux"
-            />
-          </div>
+          <div
+            className="proof-image-frame"
+            role="img"
+            aria-label="Roblox account header showing the stinkybumgamer profile and a balance of 23,428 Robux"
+          />
           <figcaption>Roblox creator profile · captured account balance</figcaption>
         </figure>
       </section>

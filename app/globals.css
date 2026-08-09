@@ -1031,13 +1031,11 @@ footer > a:last-child {
   overflow: hidden;
   aspect-ratio: 2172 / 202;
   border: 1px solid #c9ae93;
-  background: #17181d;
-}
-
-.proof-visual img {
-  width: 100%;
-  display: block;
-  transform: translateY(-36.187845%);
+  background-color: #17181d;
+  background-image: url("/roblox-profile-proof.png?v=23428");
+  background-repeat: no-repeat;
+  background-position: center 50.191571%;
+  background-size: 100% auto;
 }
 
 .proof-visual figcaption {
