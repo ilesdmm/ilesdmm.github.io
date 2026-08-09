@@ -133,7 +133,6 @@ const services = [
   "AI & NPC logic",
   "Economy design",
   "Vehicle frameworks",
-  "System optimization",
 ];
 
 export default function Home() {
