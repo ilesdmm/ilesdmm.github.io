@@ -240,7 +240,7 @@ export default function Home() {
           <div className="proof-label">Account snapshot</div>
           <div className="proof-image-frame">
             <img
-              src="/roblox-profile-proof.png"
+              src="/roblox-profile-proof.png?v=23428"
               alt="Roblox account header showing the stinkybumgamer profile and a balance of 23,428 Robux"
             />
           </div>

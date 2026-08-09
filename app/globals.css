@@ -1029,6 +1029,7 @@ footer > a:last-child {
   position: relative;
   z-index: 1;
   overflow: hidden;
+  aspect-ratio: 2172 / 202;
   border: 1px solid #c9ae93;
   background: #17181d;
 }
@@ -1036,6 +1037,7 @@ footer > a:last-child {
 .proof-visual img {
   width: 100%;
   display: block;
+  transform: translateY(-36.187845%);
 }
 
 .proof-visual figcaption {
