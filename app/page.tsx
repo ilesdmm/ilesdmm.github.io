@@ -233,15 +233,18 @@ export default function Home() {
           </p>
           <div className="proof-stats" aria-label="Roblox account details">
             <div><span>Profile</span><strong>stinkybumgamer</strong></div>
-            <div><span>Robux shown</span><strong>7,422</strong></div>
+            <div><span>Robux shown</span><strong>23,428</strong></div>
           </div>
         </div>
         <figure className="proof-visual">
           <div className="proof-label">Account snapshot</div>
-          <img
-            src="/roblox-profile-proof.png"
-            alt="Roblox account header showing the stinkybumgamer profile and a balance of 7,422 Robux"
-          />
+          <div className="proof-image-frame">
+            <img
+              src="/roblox-profile-proof.png"
+              alt="Roblox account header showing the stinkybumgamer profile and a balance of 23,428 Robux"
+            />
+            <span className="robux-balance-overlay" aria-hidden="true">23,428</span>
+          </div>
           <figcaption>Roblox creator profile · captured account balance</figcaption>
         </figure>
       </section>

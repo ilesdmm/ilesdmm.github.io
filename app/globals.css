@@ -1025,12 +1025,37 @@ footer > a:last-child {
   text-transform: uppercase;
 }
 
-.proof-visual img {
+.proof-image-frame {
   position: relative;
   z-index: 1;
+  overflow: hidden;
+  border: 1px solid #c9ae93;
+  background: #17181d;
+}
+
+.proof-visual img {
   width: 100%;
   display: block;
-  border: 1px solid #c9ae93;
+}
+
+.robux-balance-overlay {
+  position: absolute;
+  z-index: 2;
+  top: 5.5%;
+  right: 3.05%;
+  width: 4.25%;
+  height: 23%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: #f5f7fa;
+  background: #17181d;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(5px, 0.68vw, 12px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  white-space: nowrap;
 }
 
 .proof-visual figcaption {
