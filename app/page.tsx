@@ -2,7 +2,33 @@
 
 import { useState } from "react";
 
-const projects = [
+type Project = {
+  id: string;
+  title: string;
+  eyebrow: string;
+  description: string;
+  skills: string[];
+  featured?: boolean;
+};
+
+const projects: Project[] = [
+  {
+    id: "uxHYi6nJZbA",
+    title: "DeadShot Project",
+    eyebrow: "Most recent commission",
+    description:
+      "This project was created entirely by me as a commissioned solo developer. I handled everything shown in the video, including the scripting, animations, UI, gameplay systems, and both front-end and back-end development. Unfortunately, the project was discontinued after the client’s budget ran out, but everything shown represents work I personally created.",
+    skills: ["Solo development", "Scripting & systems", "UI & animation", "Front-end / back-end"],
+    featured: true,
+  },
+  {
+    id: "RguPZ3K_T94",
+    title: "Scalable Egg RNG System",
+    eyebrow: "Pets / RNG / Collection",
+    description:
+      "A fully self-made egg and reward framework built for scalable collection gameplay. It combines weighted rarity rolls, responsive hatching presentation, collection state, and clean system architecture that can grow with a live Roblox experience.",
+    skills: ["Weighted RNG", "Egg hatching", "Collection systems"],
+  },
   {
     id: "Qrjb1roJoBU",
     title: "Boss Fight + Parry System",
@@ -92,14 +118,6 @@ const projects = [
     skills: ["Progression loops", "Scaling formulas", "Persistent upgrades"],
   },
   {
-    id: "CeejJBcooHs",
-    title: "Pet + Egg Rarity + Hatching System",
-    eyebrow: "Pets / Collection",
-    description:
-      "A collection framework combining eggs, weighted pet rarities, and the hatching flow. This system demonstrates configurable content, collection management, probability logic, and economy-ready reward mechanics.",
-    skills: ["Pet collection", "Hatching logic", "Rarity balancing"],
-  },
-  {
     id: "3amMD4wfaNc",
     title: "Helicopter Framework",
     eyebrow: "Flight / Vehicles",
@@ -107,7 +125,7 @@ const projects = [
       "A reusable helicopter controller built around responsive flight input and stable vehicle behavior. It showcases advanced vehicle scripting, coordinated movement logic, and a framework that can support multiple aircraft.",
     skills: ["Flight controls", "Vehicle physics", "Framework design"],
   },
-] as const;
+];
 
 const services = [
   "Gameplay systems",
@@ -204,6 +222,30 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="creator-proof" aria-labelledby="creator-proof-title">
+        <div className="proof-copy">
+          <p className="kicker"><span /> Verified Roblox creator</p>
+          <h2 id="creator-proof-title">A REAL ACCOUNT.<br /><em>REAL WORK.</em></h2>
+          <p>
+            My portfolio is backed by active Roblox development experience and a
+            real creator account. This profile snapshot connects the work to the
+            account behind it—clear, direct, and verifiable.
+          </p>
+          <div className="proof-stats" aria-label="Roblox account details">
+            <div><span>Profile</span><strong>stinkybumgamer</strong></div>
+            <div><span>Robux shown</span><strong>7,422</strong></div>
+          </div>
+        </div>
+        <figure className="proof-visual">
+          <div className="proof-label">Account snapshot</div>
+          <img
+            src="/roblox-profile-proof.png"
+            alt="Roblox account header showing the stinkybumgamer profile and a balance of 7,422 Robux"
+          />
+          <figcaption>Roblox creator profile · captured account balance</figcaption>
+        </figure>
+      </section>
+
       <section className="work-section" id="work">
         <div className="section-heading">
           <div>
@@ -211,14 +253,14 @@ export default function Home() {
             <h2>PROVEN SYSTEMS.<br /><em>REAL GAMEPLAY.</em></h2>
           </div>
           <p>
-            Thirteen working systems demonstrating the architecture, game logic,
+            Fourteen working systems demonstrating the architecture, game logic,
             and player-focused thinking I bring to Roblox projects.
           </p>
         </div>
 
         <div className="project-list">
           {projects.map((project, index) => (
-            <article className="project-card" key={project.id}>
+            <article className={`project-card${project.featured ? " featured-project" : ""}`} key={project.id}>
               <div className="video-shell">
                 <div className="video-topline">
                   <span>PROJECT / {String(index + 1).padStart(2, "0")}</span>
@@ -238,6 +280,7 @@ export default function Home() {
 
               <div className="project-copy">
                 <div className="project-number">{String(index + 1).padStart(2, "0")}</div>
+                {project.featured && <p className="featured-badge">Newest · commissioned solo build</p>}
                 <p className="project-eyebrow">{project.eyebrow}</p>
                 <h3>{project.title}</h3>
                 <p className="project-description">{project.description}</p>
