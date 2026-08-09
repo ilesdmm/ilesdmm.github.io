@@ -186,7 +186,6 @@ img { display: block; width: 100%; }
   width: 100%;
   overflow: hidden;
   padding: 16px 0;
-
   background: var(--red);
   color: white;
 }
@@ -194,21 +193,18 @@ img { display: block; width: 100%; }
 .ticker-track {
   display: flex;
   width: max-content;
-
-  animation: tickerMarquee 16s linear infinite !important;
+  animation: tickerMarquee 16s linear infinite;
   will-change: transform;
 }
 
 .ticker-group {
   display: flex;
+  align-items: center;
   flex-shrink: 0;
 
-  align-items: center;
-  justify-content: space-between;
-
-  width: 100vw;
-
-  padding: 0 28px;
+  /* Equal spacing everywhere, including the loop seam */
+  gap: 32px;
+  padding-right: 32px;
 
   font-family: Impact, "Arial Narrow", sans-serif;
   font-size: 20px;
