@@ -86,6 +86,7 @@ const capabilities = [
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
+  const [activeVideo, setActiveVideo] = useState<{ id: string; title: string } | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -113,6 +114,22 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!activeVideo) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setActiveVideo(null);
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [activeVideo]);
+
   async function copyDiscord() {
     await navigator.clipboard.writeText("renolicious");
     setCopied(true);
@@ -120,6 +137,7 @@ export default function Home() {
   }
 
   return (
+    <>
     <main id="top">
       <div className="scroll-progress" aria-hidden="true" />
 
@@ -198,12 +216,12 @@ export default function Home() {
         <div className="project-list">
           {featuredProjects.map((project) => (
             <article className={`project project-${project.accent}`} key={project.number} data-reveal>
-              <a className="project-media" href={`https://youtu.be/${project.video}`} target="_blank" rel="noreferrer" aria-label={`Watch ${project.title} on YouTube`}>
+              <button className="project-media" type="button" onClick={() => setActiveVideo({ id: project.video, title: project.title })} aria-label={`Watch ${project.title} on this page`}>
                 <img src={`https://i.ytimg.com/vi/${project.video}/maxresdefault.jpg`} alt="" />
                 <span className="media-shade" />
-                <span className="play-button">PLAY <b>↗</b></span>
+                <span className="play-button">PLAY HERE <b>▶</b></span>
                 <span className="project-number">/{project.number}</span>
-              </a>
+              </button>
               <div className="project-content">
                 <p className="project-category">{project.category}</p>
                 <h3>{project.title}</h3>
@@ -211,7 +229,7 @@ export default function Home() {
                 <ul aria-label="Skills demonstrated">
                   {project.skills.map((skill) => <li key={skill}>{skill}</li>)}
                 </ul>
-                <a className="project-link" href={`https://youtu.be/${project.video}`} target="_blank" rel="noreferrer">Watch case study <span>↗</span></a>
+                <button className="project-link" type="button" onClick={() => setActiveVideo({ id: project.video, title: project.title })}>Watch here <span>▶</span></button>
               </div>
             </article>
           ))}
@@ -224,9 +242,9 @@ export default function Home() {
           </div>
           <div className="archive-list">
             {archive.map(([number, title, category, video]) => (
-              <a key={number} href={`https://youtu.be/${video}`} target="_blank" rel="noreferrer">
-                <span>{number}</span><strong>{title}</strong><em>{category}</em><b>↗</b>
-              </a>
+              <button key={number} type="button" onClick={() => setActiveVideo({ id: video, title })} aria-label={`Watch ${title} on this page`}>
+                <span>{number}</span><strong>{title}</strong><em>{category}</em><b>▶</b>
+              </button>
             ))}
           </div>
         </div>
@@ -283,5 +301,29 @@ export default function Home() {
         <a href="#top">Back to top ↑</a>
       </footer>
     </main>
+
+    {activeVideo && (
+      <div className="video-modal" role="dialog" aria-modal="true" aria-labelledby={`video-title-${activeVideo.id}`} onClick={() => setActiveVideo(null)}>
+        <div className="video-modal-panel" onClick={(event) => event.stopPropagation()}>
+          <div className="video-modal-header">
+            <div>
+              <span>Now playing</span>
+              <h2 id={`video-title-${activeVideo.id}`}>{activeVideo.title}</h2>
+            </div>
+            <button type="button" onClick={() => setActiveVideo(null)} aria-label="Close video" autoFocus>Close ×</button>
+          </div>
+          <div className="video-player">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${activeVideo.id}?autoplay=1&rel=0`}
+              title={`${activeVideo.title} video demonstration`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      </div>
+    )}
+    </>
   );
 }

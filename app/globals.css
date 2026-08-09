@@ -135,7 +135,7 @@ img { display: block; width: 100%; }
 .project-list { width: min(1640px, 100%); margin: auto; }
 .project { min-height: 680px; display: grid; grid-template-columns: minmax(0,1.6fr) minmax(360px,.8fr); border-top: 1px solid var(--line); }
 .project:last-child { border-bottom: 1px solid var(--line); }
-.project-media { position: relative; min-height: 650px; overflow: hidden; background: #111; }
+.project-media { position: relative; width: 100%; min-height: 650px; overflow: hidden; padding: 0; border: 0; background: #111; color: inherit; cursor: pointer; font: inherit; text-align: left; }
 .project-media img { height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.08) brightness(.68); transition: transform .8s cubic-bezier(.2,.8,.2,1),filter .5s; }
 .project:hover .project-media img { transform: scale(1.035); filter: grayscale(.2) contrast(1.05) brightness(.78); }
 .media-shade { position: absolute; inset: 0; background: linear-gradient(90deg,transparent 50%,rgba(0,0,0,.5)),linear-gradient(0deg,rgba(0,0,0,.65),transparent 45%); }
@@ -153,7 +153,7 @@ img { display: block; width: 100%; }
 .project-content ul { display: flex; flex-wrap: wrap; gap: 7px; list-style: none; padding: 0; margin: 32px 0 48px; }
 .project-content li { padding: 8px 10px; border: 1px solid #333; color: #aaa; font-size: 9px; letter-spacing: .1em; text-transform: uppercase; }
 .project-red .project-content li { border-color: rgba(255,255,255,.36); color: white; }
-.project-link { margin-top: auto; width: max-content; font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.project-link { margin-top: auto; width: max-content; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
 .project-link span { color: var(--red); margin-left: 8px; }
 .project-red .project-link span { color: white; }
 
@@ -161,12 +161,12 @@ img { display: block; width: 100%; }
 .archive-heading { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 55px; }
 .archive-heading p { max-width: 450px; margin: 0; color: #777; line-height: 1.55; }
 .archive-list { border-top: 1px solid #292929; }
-.archive-list a { display: grid; grid-template-columns: 70px 1.4fr 1fr 30px; align-items: center; min-height: 92px; border-bottom: 1px solid #292929; transition: padding .25s,background .25s; }
-.archive-list a:hover { padding-inline: 18px; background: var(--red); }
+.archive-list button { display: grid; grid-template-columns: 70px 1.4fr 1fr 30px; align-items: center; width: 100%; min-height: 92px; padding: 0; border: 0; border-bottom: 1px solid #292929; background: transparent; color: inherit; cursor: pointer; font: inherit; text-align: left; transition: padding .25s,background .25s; }
+.archive-list button:hover { padding-inline: 18px; background: var(--red); }
 .archive-list span, .archive-list em { color: #666; font-size: 10px; font-style: normal; letter-spacing: .13em; text-transform: uppercase; }
 .archive-list strong { font-family: Impact,"Arial Narrow",sans-serif; font-size: clamp(25px,3vw,44px); font-weight: 400; text-transform: uppercase; }
 .archive-list b { justify-self: end; font-weight: 400; }
-.archive-list a:hover span, .archive-list a:hover em { color: rgba(255,255,255,.7); }
+.archive-list button:hover span, .archive-list button:hover em { color: rgba(255,255,255,.7); }
 
 .capabilities { padding: 145px 0; background: var(--red); color: white; }
 .capability-title { display: grid; grid-template-columns: 1fr 3fr; gap: 5vw; }
@@ -206,6 +206,16 @@ footer .brand { color: white; }
 footer p { text-align: center; }
 footer > a:last-child { justify-self: end; color: white; }
 
+.video-modal { position: fixed; z-index: 200; inset: 0; display: grid; place-items: center; padding: 28px; background: rgba(0,0,0,.9); backdrop-filter: blur(12px); }
+.video-modal-panel { width: min(1180px,96vw); overflow: hidden; border: 1px solid rgba(239,27,36,.58); background: #080808; box-shadow: 0 28px 90px rgba(0,0,0,.72),0 0 50px rgba(239,27,36,.13); }
+.video-modal-header { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding: 22px 24px; border-bottom: 1px solid var(--line); }
+.video-modal-header span { display: block; margin-bottom: 5px; color: var(--red); font-size: 9px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.video-modal-header h2 { margin: 0; font-family: Impact,"Arial Narrow",sans-serif; font-size: clamp(28px,4vw,54px); font-weight: 400; line-height: .92; text-transform: uppercase; }
+.video-modal-header button { flex: 0 0 auto; padding: 11px 14px; border: 1px solid var(--red); background: var(--red); color: white; cursor: pointer; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.video-modal-header button:hover { background: var(--deep-red); }
+.video-player { position: relative; width: 100%; aspect-ratio: 16/9; background: black; }
+.video-player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
 [data-reveal] { opacity: 0; transform: translateY(35px); transition: opacity .85s ease,transform .85s cubic-bezier(.2,.7,.2,1); }
 [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
 
@@ -231,6 +241,14 @@ footer > a:last-child { justify-self: end; color: white; }
   .contact-grid { grid-template-columns: 1fr 1fr 110px; }
 }
 
+@media (max-width: 620px) {
+  .video-modal { padding: 12px; }
+  .video-modal-panel { width: 100%; }
+  .video-modal-header { align-items: flex-start; padding: 16px; }
+  .video-modal-header h2 { font-size: 30px; }
+  .video-modal-header button { padding: 10px; }
+}
+
 @media (max-width: 650px) {
   .site-header { height: 72px; }
   .header-cta { font-size: 0; gap: 0; padding: 0; }
@@ -253,7 +271,7 @@ footer > a:last-child { justify-self: end; color: white; }
   .project-content { min-height: 540px; padding: 40px 24px; }
   .project-content h3 { font-size: 48px; }
   .archive { padding-top: 100px; }
-  .archive-list a { grid-template-columns: 42px 1fr 25px; min-height: 78px; }
+  .archive-list button { grid-template-columns: 42px 1fr 25px; min-height: 78px; }
   .archive-list em { display: none; }
   .archive-list strong { font-size: 25px; }
   .capability-list article { grid-template-columns: 40px 1fr; padding-block: 25px; }
