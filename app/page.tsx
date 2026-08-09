@@ -187,7 +187,7 @@ export default function Home() {
 
       <section className="ticker" aria-label="Core disciplines">
         <div className="ticker-track">
-          <span>GAMEPLAY SYSTEMS</span><i>◆</i><span>MODULAR LUAU</span><i>◆</i><span>AI FRAMEWORKS</span><i>◆</i><span>PLAYER DATA</span><i>◆</i><span>GAMEPLAY SYSTEMS</span><i>◆</i>
+          <span>GAMEPLAY SYSTEMS</span><i>◆</i><span>MODULAR LUAU</span><i>◆</i><span>AI FRAMEWORKS</span><i>◆</i><span>PLAYER DATA</span><i>◆</i><span>CORE SYSTEMS</span><i>◆</i>
         </div>
       </section>
 
