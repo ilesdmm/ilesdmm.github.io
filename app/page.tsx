@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const featuredProjects = [
   {
@@ -83,6 +83,56 @@ const capabilities = [
   ["04", "Economy design", "Currencies, weighted rewards, rebirth loops and systems tuned for long-term play."],
   ["05", "Vehicle frameworks", "Responsive ground and air vehicles built around stable, extensible control systems."],
 ];
+
+type SystemPreviewProps = {
+  number: string;
+  title: string;
+  video: string;
+  onOpen: () => void;
+};
+
+function SystemPreview({ number, title, video, onOpen }: SystemPreviewProps) {
+  const previewRef = useRef<HTMLDivElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    const preview = previewRef.current;
+    if (!preview) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsPlaying(entry.isIntersecting),
+      { rootMargin: "100px 0px", threshold: 0.18 },
+    );
+
+    observer.observe(preview);
+    return () => observer.disconnect();
+  }, []);
+
+  const autoplayUrl =
+    `https://www.youtube-nocookie.com/embed/${video}` +
+    `?autoplay=1&mute=1&loop=1&playlist=${video}&controls=0&rel=0&playsinline=1&disablekb=1`;
+
+  return (
+    <div className="project-media" ref={previewRef}>
+      {isPlaying ? (
+        <iframe
+          src={autoplayUrl}
+          title={`${title} autoplay preview`}
+          allow="autoplay; encrypted-media; picture-in-picture"
+          loading="lazy"
+          tabIndex={-1}
+        />
+      ) : (
+        <img src={`https://i.ytimg.com/vi/${video}/maxresdefault.jpg`} alt="" />
+      )}
+      <span className="media-shade" aria-hidden="true" />
+      <button className="project-preview-button" type="button" onClick={onOpen} aria-label={`Watch ${title} with sound`}>
+        <span className="play-button">VIEW WITH SOUND <b>▶</b></span>
+        <span className="project-number">/{number}</span>
+      </button>
+    </div>
+  );
+}
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
@@ -250,12 +300,12 @@ export default function Home() {
         <div className="project-list">
           {featuredProjects.map((project) => (
             <article className={`project project-${project.accent}`} key={project.number} data-reveal>
-              <button className="project-media" type="button" onClick={() => setActiveVideo({ id: project.video, title: project.title })} aria-label={`Watch ${project.title} on this page`}>
-                <img src={`https://i.ytimg.com/vi/${project.video}/maxresdefault.jpg`} alt="" />
-                <span className="media-shade" />
-                <span className="play-button">PLAY HERE <b>▶</b></span>
-                <span className="project-number">/{project.number}</span>
-              </button>
+              <SystemPreview
+                number={project.number}
+                title={project.title}
+                video={project.video}
+                onOpen={() => setActiveVideo({ id: project.video, title: project.title })}
+              />
               <div className="project-content">
                 <p className="project-category">{project.category}</p>
                 <h3>{project.title}</h3>
