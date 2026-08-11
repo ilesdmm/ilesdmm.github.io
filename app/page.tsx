@@ -11,7 +11,7 @@ const featuredProjects = [
       "A complete commissioned experience built end to end—from systems and animation to UI, gameplay, and both sides of the stack.",
     skills: ["Solo development", "Gameplay systems", "UI + animation"],
     video: "uxHYi6nJZbA",
-    accent: "red",
+    accent: "dark",
   },
   {
     number: "02",
@@ -25,32 +25,32 @@ const featuredProjects = [
   },
   {
     number: "03",
-    title: "Boss Fight + Parry",
+    title: "Boss Fight System",
     category: "Combat · Boss AI",
     description:
       "A high-stakes encounter focused on readable attack logic, precise parry windows, combat feedback, and a fair player experience.",
     skills: ["Boss logic", "Parry timing", "Combat feedback"],
-    video: "Qrjb1roJoBU",
+    video: "slXKC5aw6rY",
     accent: "dark",
   },
   {
     number: "04",
-    title: "Inventory + Data",
-    category: "Persistence · Inventory",
+    title: "Dynamic Movement System",
+    category: "Movement · Character",
     description:
-      "A dependable player-data foundation with structured inventory state, reliable saves, and clean client/server synchronization.",
-    skills: ["Data persistence", "Inventory architecture", "State sync"],
-    video: "tc7lUxgfz0Q",
-    accent: "red",
+      "A responsive character controller with dynamic locomotion, polished transitions, and movement states built for fluid gameplay.",
+    skills: ["Movement states", "Responsive controls", "Animation flow"],
+    video: "Nghd8kI_ICA",
+    accent: "dark",
   },
   {
     number: "05",
-    title: "Modular AI + Aggro",
-    category: "AI · Combat",
+    title: "Parry System",
+    category: "Combat · Defense",
     description:
-      "Reusable NPC intelligence with target detection, aggro behavior, state-driven decisions, and an extensible enemy framework.",
-    skills: ["NPC states", "Aggro targeting", "Modular AI"],
-    video: "xcOu7b0e5jM",
+      "A responsive parry framework with precise timing windows, combat feedback, and reliable server-side validation.",
+    skills: ["Parry windows", "Combat feedback", "Server validation"],
+    video: "Xc5ziaTrDrM",
     accent: "dark",
   },
   {
@@ -61,19 +61,20 @@ const featuredProjects = [
       "A reusable foundation for responsive vehicles and functional gear with modular controls and reliable equipment state.",
     skills: ["Vehicle systems", "Gear framework", "Reusable modules"],
     video: "nNdAh53DC7M",
-    accent: "red",
+    accent: "dark",
   },
 ];
 
 const archive = [
-  ["07", "Inventory UI Framework", "Inventory · UI", "0Tv6my4FM0w"],
-  ["08", "Quest + Money Framework", "Quests · Economy", "hCqlQ7YgMXs"],
-  ["09", "Player Movement System", "Movement · Character", "ke1Bhn0ZGGc"],
-  ["10", "Looting + Backpack", "Loot · Equipment", "cZyyWepvBCc"],
-  ["11", "Chest + RNG System", "Rewards · RNG", "UGyoDSMMh-4"],
-  ["12", "Round System Manager", "Rounds · Game flow", "coa5FW_ExA8"],
-  ["13", "Progressive Rebirth", "Progression · Prestige", "m_zlT-_N4i4"],
-  ["14", "Helicopter Framework", "Flight · Vehicles", "3amMD4wfaNc"],
+  ["07", "Modular AI + Aggro", "AI · Combat", "xcOu7b0e5jM"],
+  ["08", "Inventory UI Framework", "Inventory · UI", "0Tv6my4FM0w"],
+  ["09", "Quest + Money Framework", "Quests · Economy", "hCqlQ7YgMXs"],
+  ["10", "Player Movement System", "Movement · Character", "ke1Bhn0ZGGc"],
+  ["11", "Looting + Backpack", "Loot · Equipment", "cZyyWepvBCc"],
+  ["12", "Chest + RNG System", "Rewards · RNG", "UGyoDSMMh-4"],
+  ["13", "Round System Manager", "Rounds · Game flow", "coa5FW_ExA8"],
+  ["14", "Progressive Rebirth", "Progression · Prestige", "m_zlT-_N4i4"],
+  ["15", "Helicopter Framework", "Flight · Vehicles", "3amMD4wfaNc"],
 ];
 
 const capabilities = [
@@ -228,7 +229,7 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-stats" aria-label="Portfolio overview">
-          <div><strong>14</strong><span>Systems<br />showcased</span></div>
+          <div><strong>15</strong><span>Systems<br />showcased</span></div>
           <div><strong>100%</strong><span>Custom<br />Luau work</span></div>
           <div><strong>FULL</strong><span>Stack Roblox<br />development</span></div>
           <div className="hero-scroll"><span>Scroll to enter</span><b>↓</b></div>
@@ -293,7 +294,7 @@ export default function Home() {
           <span className="section-label">02 / Selected work</span>
           <div>
             <h2>PROVEN SYSTEMS.<br /><em>REAL GAMEPLAY.</em></h2>
-            <p>Six featured builds. Fourteen systems in total. Every one made to solve a real gameplay problem.</p>
+            <p>Six featured builds. Fifteen systems in total. Every one made to solve a real gameplay problem.</p>
           </div>
         </div>
 
@@ -321,8 +322,8 @@ export default function Home() {
 
         <div className="archive section-shell" data-reveal>
           <div className="archive-heading">
-            <span className="section-label">More systems / 07—14</span>
-            <p>Eight more builds across UI, progression, movement, rewards, and vehicles.</p>
+            <span className="section-label">More systems / 07—15</span>
+            <p>Nine more builds across AI, UI, progression, movement, rewards, and vehicles.</p>
           </div>
           <div className="archive-list">
             {archive.map(([number, title, category, video]) => (
