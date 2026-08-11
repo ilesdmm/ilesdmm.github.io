@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 const featuredProjects = [
   {
     number: "01",
-    title: "DeadShot Project",
+    title: "Full FPS Game",
     category: "Commissioned solo build",
     description:
       "A complete commissioned experience built end to end—from systems and animation to UI, gameplay, and both sides of the stack.",
