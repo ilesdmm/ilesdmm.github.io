@@ -129,7 +129,7 @@ function SystemPreview({ number, title, video, onOpen }: SystemPreviewProps) {
       <span className="media-shade" aria-hidden="true" />
       <button className="project-preview-button" type="button" onClick={onOpen} aria-label={`Watch ${title} with sound`}>
         <span className="play-button">VIEW WITH SOUND <b>▶</b></span>
-        <span className="project-number">/{number}</span>
+        <span className="project-number">{number}</span>
       </button>
     </div>
   );
