@@ -30,7 +30,7 @@ const featuredProjects = [
     description:
       "A high-stakes encounter focused on readable attack logic, precise parry windows, combat feedback, and a fair player experience.",
     skills: ["Boss logic", "Parry timing", "Combat feedback"],
-    video: "slXKC5aw6rY",
+    video: "UwSvlbf52wE",
     accent: "dark",
   },
   {
