@@ -77,12 +77,31 @@ const archive = [
   ["15", "Helicopter Framework", "Flight · Vehicles", "3amMD4wfaNc"],
 ];
 
-const capabilities = [
-  ["01", "Gameplay systems", "Combat, movement, quests, rounds, rewards and the moment-to-moment logic players feel."],
-  ["02", "Persistent data", "Reliable player profiles, inventories, progression and secure client/server synchronization."],
-  ["03", "AI + NPC logic", "State-driven enemies, targeting, aggro behavior and reusable decision frameworks."],
-  ["04", "Economy design", "Currencies, weighted rewards, rebirth loops and systems tuned for long-term play."],
-  ["05", "Vehicle frameworks", "Responsive ground and air vehicles built around stable, extensible control systems."],
+const uiShowcase = [
+  {
+    number: "01",
+    title: "Rebirth interface",
+    detail: "Progression UI · Custom icon set",
+    image: "/ui-gfx/rebirth-interface.png",
+  },
+  {
+    number: "02",
+    title: "Skins shop",
+    detail: "Storefront UI · Custom icon set",
+    image: "/ui-gfx/skins-interface.png",
+  },
+  {
+    number: "03",
+    title: "Jump upgrades",
+    detail: "Upgrade UI · Custom icon set",
+    image: "/ui-gfx/jump-upgrades-interface.png",
+  },
+  {
+    number: "04",
+    title: "Fantasy portfolio UI",
+    detail: "Visual direction · Interface design",
+    image: "/ui-gfx/portfolio-interface.png",
+  },
 ];
 
 type SystemPreviewProps = {
@@ -199,7 +218,7 @@ export default function Home() {
         </a>
         <nav aria-label="Main navigation">
           <a href="#work">Work</a>
-          <a href="#capabilities">Skills</a>
+          <a href="#capabilities">UI / GFX</a>
           <a href="#contact">Contact</a>
         </nav>
         <a className="header-cta" href="#contact">
@@ -335,19 +354,51 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="capabilities" id="capabilities">
-        <div className="capability-title section-shell" data-reveal>
-          <span className="section-label section-label-light">03 / Capabilities</span>
-          <h2>BUILT TO<br /><span>DO MORE.</span></h2>
-        </div>
-        <div className="capability-list section-shell">
-          {capabilities.map(([number, title, description]) => (
-            <article key={number} data-reveal>
-              <span>{number}</span>
-              <h3>{title}</h3>
-              <p>{description}</p>
+      <section className="ui-gfx" id="capabilities">
+        <div className="ui-gfx-inner section-shell">
+          <div className="ui-gfx-heading" data-reveal>
+            <span className="section-label">03 / UI + GFX</span>
+            <div>
+              <p className="ui-gfx-kicker">UI / GFX ARTIST</p>
+              <h2>DESIGNED TO<br /><em>FEEL ALIVE.</em></h2>
+              <p className="ui-gfx-intro">
+                I design game interfaces from first icon to final interaction. Every icon shown here is custom-made, and I&apos;m highly skilled at advanced tweening that makes menus feel responsive, polished, and satisfying to use.
+              </p>
+            </div>
+          </div>
+
+          <div className="ui-gfx-strengths" aria-label="UI and GFX strengths" data-reveal>
+            <article>
+              <span>01</span>
+              <strong>Custom icons</strong>
+              <p>Every icon is drawn for the interface—no stock icon packs or mismatched visual language.</p>
             </article>
-          ))}
+            <article>
+              <span>02</span>
+              <strong>UI / GFX design</strong>
+              <p>Clear hierarchy, bold art direction, and game-ready layouts built around the player experience.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <strong>Advanced tweening</strong>
+              <p>Confident motion work for menus, feedback states, transitions, and interactions that feel alive.</p>
+            </article>
+          </div>
+
+          <div className="ui-gfx-gallery">
+            {uiShowcase.map((project) => (
+              <figure className="ui-gfx-card" key={project.number} data-reveal>
+                <div className="ui-gfx-image">
+                  <img src={project.image} alt={`${project.title} Roblox interface designed by Renolicious`} loading="lazy" />
+                  <span>{project.number}</span>
+                </div>
+                <figcaption>
+                  <strong>{project.title}</strong>
+                  <span>{project.detail}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </section>
 
