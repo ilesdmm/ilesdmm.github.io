@@ -63,17 +63,44 @@ const featuredProjects = [
     video: "nNdAh53DC7M",
     accent: "dark",
   },
+  {
+    number: "07",
+    title: "CHEST RNG SYSTEM",
+    category: "Rewards · RNG",
+    description:
+      "A scalable chest framework with weighted loot tables, responsive opening feedback, and reward logic built for easy expansion.",
+    skills: ["Weighted RNG", "Reward tables", "Opening feedback"],
+    video: "0i5ezCS8S6A",
+    accent: "dark",
+  },
+  {
+    number: "08",
+    title: "SCALABLE REBIRTH SYSTEM",
+    category: "Progression · Prestige",
+    description:
+      "A configurable rebirth loop with clean reset rules, multiplier scaling, and progression architecture designed to grow with the game.",
+    skills: ["Rebirth scaling", "Reset logic", "Progression design"],
+    video: "F9BkztwdsUc",
+    accent: "dark",
+  },
+  {
+    number: "09",
+    title: "QUEST + DIALOGUE SYSTEM",
+    category: "Quests · Dialogue",
+    description:
+      "A connected quest and dialogue framework with tracked objectives, character conversations, and reusable state-driven flows.",
+    skills: ["Quest states", "Dialogue flow", "Objective tracking"],
+    video: "l5_eO186u6c",
+    accent: "dark",
+  },
 ];
 
 const archive = [
-  ["07", "Modular AI + Aggro", "AI · Combat", "xcOu7b0e5jM"],
-  ["08", "Inventory UI Framework", "Inventory · UI", "0Tv6my4FM0w"],
-  ["09", "Quest + Money Framework", "Quests · Economy", "hCqlQ7YgMXs"],
-  ["10", "Player Movement System", "Movement · Character", "ke1Bhn0ZGGc"],
-  ["11", "Looting + Backpack", "Loot · Equipment", "cZyyWepvBCc"],
-  ["12", "Chest + RNG System", "Rewards · RNG", "UGyoDSMMh-4"],
-  ["13", "Round System Manager", "Rounds · Game flow", "coa5FW_ExA8"],
-  ["14", "Progressive Rebirth", "Progression · Prestige", "m_zlT-_N4i4"],
+  ["10", "Modular AI + Aggro", "AI · Combat", "xcOu7b0e5jM"],
+  ["11", "Inventory UI Framework", "Inventory · UI", "0Tv6my4FM0w"],
+  ["12", "Player Movement System", "Movement · Character", "ke1Bhn0ZGGc"],
+  ["13", "Looting + Backpack", "Loot · Equipment", "cZyyWepvBCc"],
+  ["14", "Round System Manager", "Rounds · Game flow", "coa5FW_ExA8"],
   ["15", "Helicopter Framework", "Flight · Vehicles", "3amMD4wfaNc"],
 ];
 
@@ -313,7 +340,7 @@ export default function Home() {
           <span className="section-label">02 / Selected work</span>
           <div>
             <h2>PROVEN SYSTEMS.<br /><em>REAL GAMEPLAY.</em></h2>
-            <p>Six featured builds. Fifteen systems in total. Every one made to solve a real gameplay problem.</p>
+            <p>Nine featured builds. Fifteen systems in total. Every one made to solve a real gameplay problem.</p>
           </div>
         </div>
 
@@ -341,8 +368,8 @@ export default function Home() {
 
         <div className="archive section-shell" data-reveal>
           <div className="archive-heading">
-            <span className="section-label">More systems / 07—15</span>
-            <p>Nine more builds across AI, UI, progression, movement, rewards, and vehicles.</p>
+            <span className="section-label">More systems / 10—15</span>
+            <p>Six more builds across AI, UI, movement, equipment, game flow, and vehicles.</p>
           </div>
           <div className="archive-list">
             {archive.map(([number, title, category, video]) => (
