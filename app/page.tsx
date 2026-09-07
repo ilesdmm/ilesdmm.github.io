@@ -11,39 +11,16 @@ type SystemPreviewProps = {
   video: string;
   onOpen: () => void;
   paused: boolean;
+  isPlaying: boolean;
 };
 
-function SystemPreview({ number, title, video, onOpen, paused }: SystemPreviewProps) {
-  const previewRef = useRef<HTMLDivElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  useEffect(() => {
-    const preview = previewRef.current;
-    if (!preview) return;
-
-    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let visible = false;
-    const update = () => setIsPlaying(visible && !motion.matches && !document.hidden);
-    const observer = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
-      update();
-    }, { rootMargin: "100px 0px", threshold: 0.18 });
-    observer.observe(preview);
-    motion.addEventListener("change", update);
-    document.addEventListener("visibilitychange", update);
-    return () => {
-      observer.disconnect();
-      motion.removeEventListener("change", update);
-      document.removeEventListener("visibilitychange", update);
-    };
-  }, []);
-
+function SystemPreview({ number, title, video, onOpen, paused, isPlaying }: SystemPreviewProps) {
   const autoplayUrl =
     `https://www.youtube-nocookie.com/embed/${video}` +
     `?autoplay=1&mute=1&loop=1&playlist=${video}&controls=0&rel=0&playsinline=1&disablekb=1`;
 
   return (
-    <div className="project-media" ref={previewRef}>
+    <div className="project-media">
       <img src={`https://i.ytimg.com/vi/${video}/hqdefault.jpg`} alt="" loading="lazy" width="480" height="360" />
       {isPlaying && !paused && (
         <iframe
@@ -64,9 +41,30 @@ function SystemPreview({ number, title, video, onOpen, paused }: SystemPreviewPr
 }
 
 export default function Home() {
+  const showcaseRef = useRef<HTMLDivElement>(null);
+  const [showcasePlaying, setShowcasePlaying] = useState(false);
+  const [previewsPaused, setPreviewsPaused] = useState(false);
   const [copyStatus, setCopyStatus] = useState("");
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [activeVideo, setActiveVideo] = useState<{ id: string; title: string } | null>(null);
+
+  useEffect(() => {
+    const showcase = showcaseRef.current;
+    if (!showcase) return;
+    let visible = false;
+    const update = () => setShowcasePlaying(visible && !document.hidden);
+    // Start all nine previews together when the showcase enters view.
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      update();
+    }, { rootMargin: "100px 0px", threshold: 0 });
+    observer.observe(showcase);
+    document.addEventListener("visibilitychange", update);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", update);
+    };
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -220,11 +218,17 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="project-list">
+        <div className="showcase-controls section-shell">
+          <button className="project-link" type="button" onClick={() => setPreviewsPaused(value => !value)}>
+            {previewsPaused ? "Play previews ▶" : "Pause previews Ⅱ"}
+          </button>
+        </div>
+        <div className="project-list" ref={showcaseRef}>
           {featuredProjects.map((project) => (
             <article className={`project project-${project.accent}`} key={project.number} data-reveal>
               <SystemPreview
-                paused={Boolean(activeVideo)}
+                paused={Boolean(activeVideo) || previewsPaused}
+                isPlaying={showcasePlaying}
                 number={project.number}
                 title={project.title}
                 video={project.video}

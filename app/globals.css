@@ -504,14 +504,8 @@ section[id] { scroll-margin-top: 28px; }
 .section-heading h2 { line-height: .95; }
 .section-heading div > p { color: #aaa; }
 .project-list { max-width: 1320px; width: calc(100% - 96px); gap: 24px; }
+.showcase-controls { display: flex; justify-content: flex-end; margin-bottom: 16px; }
 .project,.ui-gfx-card { border-radius: var(--radius); }
-.project:first-child { grid-column: span 2; grid-row: span 2; }
-.project:first-child .project-media { aspect-ratio: 16/10; }
-.project:first-child .project-content { padding: 32px; }
-.project:first-child h3 { font-size: clamp(40px, 5vw, 72px); }
-.project:first-child .project-description { max-width: 580px; font-size: 18px; }
-.project:first-child .project-category { color: #f9767c; }
-.project:first-child .project-link { margin-top: 24px; }
 .project-media img { filter: saturate(.8) brightness(.85); }
 .project:hover .project-media img { filter: saturate(1) brightness(1); }
 .project-content { padding: 24px; }
@@ -575,9 +569,6 @@ footer { font-size: 12px; gap: 24px; }
   .hero-stats { grid-template-columns: repeat(2,minmax(0,1fr)); }
   .hero-stats > div:nth-child(3) { padding-left: 0; border-left: 0; }
   .project-list { width: calc(100% - 44px); }
-  .project:first-child { grid-column: 1 / -1; grid-row: auto; display: grid; grid-template-columns: 1.15fr 1fr; }
-  .project:first-child .project-media { aspect-ratio: auto; min-height: 320px; height: 100%; }
-  .project:first-child .project-description { font-size: 16px; }
   .ui-gfx-card figcaption { flex-direction: column; align-items: flex-start; gap: 10px; }
   .ui-gfx-card figcaption > span { text-align: left; }
 }
@@ -597,10 +588,6 @@ footer { font-size: 12px; gap: 24px; }
   .site-header { padding-inline: 18px; }
   .brand { font-size: 10px; gap: 8px; }
   .section-heading h2 { font-size: clamp(36px, 10vw, 64px); }
-  .project:first-child { display: flex; }
-  .project:first-child .project-media { min-height: 0; aspect-ratio: 16/9; }
-  .project:first-child .project-content { padding: 24px; }
-  .project:first-child h3 { font-size: 40px; }
   .capability-grid { grid-template-columns: 1fr; }
   .capability-card { padding: 24px; }
   .capability-card h3 { margin-top: 18px; }
