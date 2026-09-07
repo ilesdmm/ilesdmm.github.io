@@ -481,7 +481,6 @@ section[id] { scroll-margin-top: 28px; }
 .hero h1 { font-size: clamp(58px, 9.5vw, 150px); }
 .hero h1 > span:nth-child(2) { text-align: center; padding-left: 0; }
 .hero h1 > span:last-child { text-align: right; }
-.hero h1 .hero-period { display: inline; color: var(--red); }
 .hero-description { max-width: 650px; }
 .hero-description p { color: #aaa; font-size: 16px; line-height: 1.65; margin: 12px 0 0; }
 .hero-description .hero-promise { color: #f2f2f2; font-size: clamp(20px, 1.9vw, 27px); font-weight: 600; line-height: 1.35; }

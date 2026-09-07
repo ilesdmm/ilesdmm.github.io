@@ -152,7 +152,7 @@ export default function Home() {
         <h1 id="hero-title">
           <span>I BUILD THE</span>
           <span className="outline">SYSTEMS BEHIND</span>
-          <span>GREAT GAMES<span className="hero-period">.</span></span>
+          <span>GREAT GAMES</span>
         </h1>
         <div className="hero-bottom">
           <div className="hero-description"><p className="hero-promise">I build complete, production-ready Roblox games and systems.</p><p>From backend architecture and gameplay to polished UI, tweening, GFX, monetization, and optimization.</p></div>
