@@ -232,6 +232,12 @@ export default function Home() {
 
       <span>CORE SYSTEMS</span>
       <i>◆</i>
+
+      <span>UI &amp; GFX</span>
+      <i>◆</i>
+
+      <span>PROGRESSION SYSTEMS</span>
+      <i>◆</i>
     </div>
 
     <div className="ticker-group" aria-hidden="true">
@@ -248,6 +254,12 @@ export default function Home() {
       <i>◆</i>
 
       <span>CORE SYSTEMS</span>
+      <i>◆</i>
+
+      <span>UI &amp; GFX</span>
+      <i>◆</i>
+
+      <span>PROGRESSION SYSTEMS</span>
       <i>◆</i>
     </div>
 

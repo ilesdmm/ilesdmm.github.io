@@ -194,7 +194,7 @@ img { display: block; width: 100%; }
 .ticker-track {
   display: flex;
   width: max-content;
-  animation: tickerMarquee 16s linear infinite;
+  animation: tickerMarquee 22s linear infinite;
   will-change: transform;
 }
 
@@ -601,7 +601,9 @@ footer { font-size: 12px; gap: 24px; }
   .contact-inner { padding-block: 72px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+  /* Keep the requested marquee running while reducing decorative motion. */
+  *:not(.ticker-track), *::before, *::after { animation: none !important; }
   [data-reveal] { opacity: 1; transform: none; }
 }
 .video-modal { margin: 0; width: 100vw; height: 100svh; max-width: none; max-height: none; border: 0; color: var(--ink); }
