@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { portfolioConfig as config, capabilities, testimonials } from "./portfolio-config";
 
 import { featuredProjects, archive, uiShowcase } from "./portfolio-projects";
+import { loadYouTubeAPI, type PreviewPlayer } from "./youtube-api";
 
 type SystemPreviewProps = {
   number: string;
@@ -15,22 +16,68 @@ type SystemPreviewProps = {
 };
 
 function SystemPreview({ number, title, video, onOpen, paused, isPlaying }: SystemPreviewProps) {
-  const autoplayUrl =
-    `https://www.youtube-nocookie.com/embed/${video}` +
-    `?autoplay=1&mute=1&loop=1&playlist=${video}&controls=0&rel=0&playsinline=1&disablekb=1`;
+  const playerHost = useRef<HTMLDivElement>(null);
+  const playerRef = useRef<PreviewPlayer | null>(null);
+  const pauseRef = useRef(paused);
+
+  useEffect(() => {
+    pauseRef.current = paused;
+    const player = playerRef.current;
+    if (!player) return;
+    if (paused) player.pauseVideo();
+    else player.playVideo();
+  }, [paused]);
+
+  useEffect(() => {
+    const host = playerHost.current;
+    if (!isPlaying || !host) return;
+    let cancelled = false;
+    let player: PreviewPlayer | undefined;
+    // The iframe remains mounted while scrolling, pausing, or opening a demo.
+    const iframe = document.createElement("iframe");
+    iframe.src = `https://www.youtube-nocookie.com/embed/${video}` +
+      `?enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}` +
+      `&autoplay=${pauseRef.current ? 0 : 1}&mute=1&loop=1&playlist=${video}&controls=0&rel=0&playsinline=1&disablekb=1`;
+    iframe.title = `${title} autoplay preview`;
+    iframe.allow = "autoplay; encrypted-media; picture-in-picture";
+    iframe.referrerPolicy = "strict-origin-when-cross-origin";
+    iframe.tabIndex = -1;
+    host.append(iframe);
+    void loadYouTubeAPI().then(api => {
+      if (cancelled) return;
+      player = new api.Player(iframe, {
+        events: {
+          onReady: event => {
+            if (cancelled) return;
+            playerRef.current = event.target;
+            event.target.mute();
+            if (pauseRef.current) event.target.pauseVideo();
+            else event.target.playVideo();
+          },
+          onStateChange: event => {
+            if (cancelled || pauseRef.current) return;
+            if (event.data === 0) {
+              event.target.seekTo(0, true);
+              event.target.playVideo();
+            }
+          },
+        },
+      });
+    }).catch(() => {
+      // The original muted looping embed still works if the controls API fails.
+    });
+    return () => {
+      cancelled = true;
+      playerRef.current = null;
+      player?.destroy();
+      host.replaceChildren();
+    };
+  }, [isPlaying, video, title]);
 
   return (
     <div className="project-media">
       <img src={`https://i.ytimg.com/vi/${video}/hqdefault.jpg`} alt="" loading="lazy" width="480" height="360" />
-      {isPlaying && !paused && (
-        <iframe
-          src={autoplayUrl}
-          title={`${title} autoplay preview`}
-          allow="autoplay; encrypted-media; picture-in-picture"
-          referrerPolicy="strict-origin-when-cross-origin"
-          tabIndex={-1}
-        />
-      )}
+      <div ref={playerHost} />
       <span className="media-shade" aria-hidden="true" />
       <button className="project-preview-button" type="button" onClick={onOpen} aria-label={`Watch ${title} with sound`}>
         <span className="play-button">VIEW WITH SOUND <b>▶</b></span>
@@ -51,18 +98,16 @@ export default function Home() {
   useEffect(() => {
     const showcase = showcaseRef.current;
     if (!showcase) return;
-    let visible = false;
-    const update = () => setShowcasePlaying(visible && !document.hidden);
-    // Start all nine previews together when the showcase enters view.
+    // Warm up all nine players before arrival and retain them for this page visit.
     const observer = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
-      update();
-    }, { rootMargin: "100px 0px", threshold: 0 });
+      if (entry.isIntersecting) {
+        setShowcasePlaying(true);
+        observer.disconnect();
+      }
+    }, { rootMargin: "1200px 0px", threshold: 0 });
     observer.observe(showcase);
-    document.addEventListener("visibilitychange", update);
     return () => {
       observer.disconnect();
-      document.removeEventListener("visibilitychange", update);
     };
   }, []);
 
