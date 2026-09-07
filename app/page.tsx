@@ -22,21 +22,18 @@ function SystemPreview({ number, title, video, onOpen, paused }: SystemPreviewPr
     if (!preview) return;
 
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const mobile = window.matchMedia("(max-width: 650px)");
     let visible = false;
-    const update = () => setIsPlaying(visible && !motion.matches && !mobile.matches && !document.hidden);
+    const update = () => setIsPlaying(visible && !motion.matches && !document.hidden);
     const observer = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
       update();
-    }, { threshold: 0.35 });
+    }, { rootMargin: "100px 0px", threshold: 0.18 });
     observer.observe(preview);
     motion.addEventListener("change", update);
-    mobile.addEventListener("change", update);
     document.addEventListener("visibilitychange", update);
     return () => {
       observer.disconnect();
       motion.removeEventListener("change", update);
-      mobile.removeEventListener("change", update);
       document.removeEventListener("visibilitychange", update);
     };
   }, []);
@@ -53,7 +50,7 @@ function SystemPreview({ number, title, video, onOpen, paused }: SystemPreviewPr
           src={autoplayUrl}
           title={`${title} autoplay preview`}
           allow="autoplay; encrypted-media; picture-in-picture"
-          loading="lazy"
+          referrerPolicy="strict-origin-when-cross-origin"
           tabIndex={-1}
         />
       )}
