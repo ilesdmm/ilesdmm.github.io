@@ -1,144 +1,19 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { portfolioConfig as config, capabilities, testimonials } from "./portfolio-config";
 
-const featuredProjects = [
-  {
-    number: "01",
-    title: "Full FPS Game",
-    category: "Commissioned solo build",
-    description:
-      "A complete commissioned experience built end to end—from systems and animation to UI, gameplay, and both sides of the stack.",
-    skills: ["Solo development", "Gameplay systems", "UI + animation"],
-    video: "uxHYi6nJZbA",
-    accent: "dark",
-  },
-  {
-    number: "02",
-    title: "Pet Hatching & Collection System",
-    category: "Pets · RNG · Collection",
-    description:
-      "A weighted reward framework with responsive hatching, persistent collection state, and architecture built to grow with a live game.",
-    skills: ["Weighted RNG", "Collection state", "Scalable modules"],
-    video: "RguPZ3K_T94",
-    accent: "dark",
-  },
-  {
-    number: "03",
-    title: "Boss Fight System",
-    category: "Combat · Boss AI",
-    description:
-      "A high-stakes encounter focused on readable attack logic, precise parry windows, combat feedback, and a fair player experience.",
-    skills: ["Boss logic", "Parry timing", "Combat feedback"],
-    video: "UwSvlbf52wE",
-    accent: "dark",
-  },
-  {
-    number: "04",
-    title: "Dynamic Movement System",
-    category: "Movement · Character",
-    description:
-      "A responsive character controller with dynamic locomotion, polished transitions, and movement states built for fluid gameplay.",
-    skills: ["Movement states", "Responsive controls", "Animation flow"],
-    video: "Nghd8kI_ICA",
-    accent: "dark",
-  },
-  {
-    number: "05",
-    title: "Parry System",
-    category: "Combat · Defense",
-    description:
-      "A responsive parry framework with precise timing windows, combat feedback, and reliable server-side validation.",
-    skills: ["Parry windows", "Combat feedback", "Server validation"],
-    video: "Xc5ziaTrDrM",
-    accent: "dark",
-  },
-  {
-    number: "06",
-    title: "Vehicle + Gear",
-    category: "Vehicles · Equipment",
-    description:
-      "A reusable foundation for responsive vehicles and functional gear with modular controls and reliable equipment state.",
-    skills: ["Vehicle systems", "Gear framework", "Reusable modules"],
-    video: "nNdAh53DC7M",
-    accent: "dark",
-  },
-  {
-    number: "07",
-    title: "CHEST RNG SYSTEM",
-    category: "Rewards · RNG",
-    description:
-      "A scalable chest framework with weighted loot tables, responsive opening feedback, and reward logic built for easy expansion.",
-    skills: ["Weighted RNG", "Reward tables", "Opening feedback"],
-    video: "0i5ezCS8S6A",
-    accent: "dark",
-  },
-  {
-    number: "08",
-    title: "SCALABLE REBIRTH SYSTEM",
-    category: "Progression · Prestige",
-    description:
-      "A configurable rebirth loop with clean reset rules, multiplier scaling, and progression architecture designed to grow with the game.",
-    skills: ["Rebirth scaling", "Reset logic", "Progression design"],
-    video: "F9BkztwdsUc",
-    accent: "dark",
-  },
-  {
-    number: "09",
-    title: "QUEST + DIALOGUE SYSTEM",
-    category: "Quests · Dialogue",
-    description:
-      "A connected quest and dialogue framework with tracked objectives, character conversations, and reusable state-driven flows.",
-    skills: ["Quest states", "Dialogue flow", "Objective tracking"],
-    video: "l5_eO186u6c",
-    accent: "dark",
-  },
-];
-
-const archive = [
-  ["10", "Modular AI + Aggro", "AI · Combat", "xcOu7b0e5jM"],
-  ["11", "Inventory UI Framework", "Inventory · UI", "0Tv6my4FM0w"],
-  ["12", "Player Movement System", "Movement · Character", "ke1Bhn0ZGGc"],
-  ["13", "Looting + Backpack", "Loot · Equipment", "cZyyWepvBCc"],
-  ["14", "Round System Manager", "Rounds · Game flow", "coa5FW_ExA8"],
-  ["15", "Helicopter Framework", "Flight · Vehicles", "3amMD4wfaNc"],
-];
-
-const uiShowcase = [
-  {
-    number: "01",
-    title: "Rebirth interface",
-    detail: "Progression UI · Custom icon set",
-    image: "/ui-gfx/rebirth-interface.png",
-  },
-  {
-    number: "02",
-    title: "Skins shop",
-    detail: "Storefront UI · Custom icon set",
-    image: "/ui-gfx/skins-interface.png",
-  },
-  {
-    number: "03",
-    title: "Jump upgrades",
-    detail: "Upgrade UI · Custom icon set",
-    image: "/ui-gfx/jump-upgrades-interface.png",
-  },
-  {
-    number: "04",
-    title: "Fantasy portfolio UI",
-    detail: "Visual direction · Interface design",
-    image: "/ui-gfx/portfolio-interface.png",
-  },
-];
+import { featuredProjects, archive, uiShowcase } from "./portfolio-projects";
 
 type SystemPreviewProps = {
   number: string;
   title: string;
   video: string;
   onOpen: () => void;
+  paused: boolean;
 };
 
-function SystemPreview({ number, title, video, onOpen }: SystemPreviewProps) {
+function SystemPreview({ number, title, video, onOpen, paused }: SystemPreviewProps) {
   const previewRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -146,13 +21,24 @@ function SystemPreview({ number, title, video, onOpen }: SystemPreviewProps) {
     const preview = previewRef.current;
     if (!preview) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsPlaying(entry.isIntersecting),
-      { rootMargin: "100px 0px", threshold: 0.18 },
-    );
-
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mobile = window.matchMedia("(max-width: 650px)");
+    let visible = false;
+    const update = () => setIsPlaying(visible && !motion.matches && !mobile.matches && !document.hidden);
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      update();
+    }, { threshold: 0.35 });
     observer.observe(preview);
-    return () => observer.disconnect();
+    motion.addEventListener("change", update);
+    mobile.addEventListener("change", update);
+    document.addEventListener("visibilitychange", update);
+    return () => {
+      observer.disconnect();
+      motion.removeEventListener("change", update);
+      mobile.removeEventListener("change", update);
+      document.removeEventListener("visibilitychange", update);
+    };
   }, []);
 
   const autoplayUrl =
@@ -161,7 +47,8 @@ function SystemPreview({ number, title, video, onOpen }: SystemPreviewProps) {
 
   return (
     <div className="project-media" ref={previewRef}>
-      {isPlaying ? (
+      <img src={`https://i.ytimg.com/vi/${video}/hqdefault.jpg`} alt="" loading="lazy" width="480" height="360" />
+      {isPlaying && !paused && (
         <iframe
           src={autoplayUrl}
           title={`${title} autoplay preview`}
@@ -169,8 +56,6 @@ function SystemPreview({ number, title, video, onOpen }: SystemPreviewProps) {
           loading="lazy"
           tabIndex={-1}
         />
-      ) : (
-        <img src={`https://i.ytimg.com/vi/${video}/maxresdefault.jpg`} alt="" />
       )}
       <span className="media-shade" aria-hidden="true" />
       <button className="project-preview-button" type="button" onClick={onOpen} aria-label={`Watch ${title} with sound`}>
@@ -182,7 +67,8 @@ function SystemPreview({ number, title, video, onOpen }: SystemPreviewProps) {
 }
 
 export default function Home() {
-  const [copied, setCopied] = useState(false);
+  const [copyStatus, setCopyStatus] = useState("");
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const [activeVideo, setActiveVideo] = useState<{ id: string; title: string } | null>(null);
 
   useEffect(() => {
@@ -214,6 +100,8 @@ export default function Home() {
   useEffect(() => {
     if (!activeVideo) return;
 
+    const dialog = dialogRef.current;
+    dialog?.showModal();
     const previousOverflow = document.body.style.overflow;
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") setActiveVideo(null);
@@ -222,19 +110,24 @@ export default function Home() {
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", closeOnEscape);
     return () => {
+      dialog?.close();
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", closeOnEscape);
     };
   }, [activeVideo]);
 
   async function copyDiscord() {
-    await navigator.clipboard.writeText("renolicious");
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 1800);
+    try {
+      await navigator.clipboard.writeText(config.DISCORD_USERNAME);
+      setCopyStatus("Username copied.");
+    } catch {
+      setCopyStatus(`Copy manually: ${config.DISCORD_USERNAME}`);
+    }
   }
 
   return (
     <>
+    <a className="skip-link" href="#work">Skip to projects</a>
     <main id="top">
       <div className="scroll-progress" aria-hidden="true" />
 
@@ -245,6 +138,7 @@ export default function Home() {
         </a>
         <nav aria-label="Main navigation">
           <a href="#work">Work</a>
+          <a href="#build">Capabilities</a>
           <a href="#capabilities">UI / GFX</a>
           <a href="#contact">Contact</a>
         </nav>
@@ -257,28 +151,26 @@ export default function Home() {
         <div className="hero-grid" aria-hidden="true" />
         <div className="hero-glow" aria-hidden="true" />
         <div className="hero-topline">
-          <span className="eyebrow"><i /> Roblox systems developer</span>
+          <span className="eyebrow"><i /> Currently available for work</span>
           <span className="hero-index">Portfolio / 2026</span>
         </div>
         <h1 id="hero-title">
-          <span>I BUILD THE</span>
-          <span className="outline">SYSTEMS BEHIND</span>
-          <span>GREAT GAMES.</span>
+          <span>FULL-STACK</span>
+          <span className="outline">ROBLOX</span>
+          <span>DEVELOPER<span className="hero-period">.</span></span>
         </h1>
         <div className="hero-bottom">
-          <p>
-            Modular Roblox systems engineered for performance, scale, and the kind of gameplay players come back to.
-          </p>
+          <div className="hero-description"><p className="hero-promise">I build complete, production-ready Roblox games and systems.</p><p>From backend architecture and gameplay to polished UI, tweening, GFX, monetization, and optimization.</p></div>
           <div className="hero-actions">
-            <a className="button button-primary" href="#work">Explore the work <span>↓</span></a>
-            <a className="text-link" href="#contact">Available for commissions <span>↗</span></a>
+            <a className="button button-primary" href="#work">View projects <span>↓</span></a>
+            <a className="text-link" href="#contact">Hire me <span>↗</span></a>
           </div>
         </div>
-        <div className="hero-stats" aria-label="Portfolio overview">
-          <div><strong>15</strong><span>Systems<br />showcased</span></div>
-          <div><strong>100%</strong><span>Custom<br />Luau work</span></div>
-          <div><strong>FULL</strong><span>Stack Roblox<br />development</span></div>
-          <div className="hero-scroll"><span>Scroll to enter</span><b>↓</b></div>
+        <div className="hero-stats" aria-label="Experience and availability">
+          <div><strong>{config.YEARS_EXPERIENCE}<small> Years</small></strong><span>Experience</span></div>
+          <div><strong>{config.DAILY_AVAILABILITY}</strong><span>Availability for active projects</span></div>
+          <div><strong>{config.CLIENT_WORK_VALUE}</strong><span>Client work <small>· Past 2 weeks</small></span></div>
+          <div><strong>{config.PROJECT_COUNT}</strong><span>Projects completed <small>· This month</small></span></div>
         </div>
       </section>
 
@@ -322,25 +214,12 @@ export default function Home() {
   </div>
 </section>
 
-      <section className="intro section-shell" data-reveal>
-        <div>
-          <span className="section-label">01 / Profile</span>
-        </div>
-        <div className="intro-copy">
-          <p className="display-copy">I turn ambitious Roblox ideas into <em>clean, reliable systems.</em></p>
-          <div className="intro-meta">
-            <p>From a single gameplay mechanic to a connected framework, every build is structured to be readable, secure, and ready to expand.</p>
-            <div className="verified"><span>●</span><div><small>Verified creator</small><strong>stinkybumgamer</strong></div></div>
-          </div>
-        </div>
-      </section>
-
       <section className="work" id="work">
         <div className="section-heading section-shell" data-reveal>
-          <span className="section-label">02 / Selected work</span>
+          <span className="section-label">01 / Selected work</span>
           <div>
             <h2>PROVEN SYSTEMS.<br /><em>REAL GAMEPLAY.</em></h2>
-            <p>Nine featured builds. Fifteen systems in total. Every one made to solve a real gameplay problem.</p>
+            <p>{featuredProjects.length} featured builds. {featuredProjects.length + archive.length} systems to explore. Every one made to solve a real gameplay problem.</p>
           </div>
         </div>
 
@@ -348,6 +227,7 @@ export default function Home() {
           {featuredProjects.map((project) => (
             <article className={`project project-${project.accent}`} key={project.number} data-reveal>
               <SystemPreview
+                paused={Boolean(activeVideo)}
                 number={project.number}
                 title={project.title}
                 video={project.video}
@@ -360,7 +240,7 @@ export default function Home() {
                 <ul aria-label="Skills demonstrated">
                   {project.skills.map((skill) => <li key={skill}>{skill}</li>)}
                 </ul>
-                <button className="project-link" type="button" onClick={() => setActiveVideo({ id: project.video, title: project.title })}>Watch here <span>▶</span></button>
+                <button className="project-link" type="button" onClick={() => setActiveVideo({ id: project.video, title: project.title })}>Watch demo <span>▶</span></button>
               </div>
             </article>
           ))}
@@ -368,8 +248,8 @@ export default function Home() {
 
         <div className="archive section-shell" data-reveal>
           <div className="archive-heading">
-            <span className="section-label">More systems / 10—15</span>
-            <p>Six more builds across AI, UI, movement, equipment, game flow, and vehicles.</p>
+            <span className="section-label">More systems / 10—14</span>
+            <p>Five more builds across AI, UI, equipment, game flow, and vehicles.</p>
           </div>
           <div className="archive-list">
             {archive.map(([number, title, category, video]) => (
@@ -378,6 +258,20 @@ export default function Home() {
               </button>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="build-section section-shell" id="build" aria-labelledby="build-title">
+        <div className="section-heading" data-reveal>
+          <span className="section-label">02 / Capabilities</span>
+          <div><h2 id="build-title">WHAT I CAN<br /><em>BUILD.</em></h2><p>A single mechanic or a complete game. Client and server, connected from the start.</p></div>
+        </div>
+        <div className="capability-grid">
+          {capabilities.map((group, index) => <article className="capability-card" key={group.title} data-reveal>
+            <span className="capability-index">{String(index + 1).padStart(2, "0")} /</span>
+            <h3>{group.title}</h3><p>{group.description}</p>
+            <ul>{group.items.map(item => <li key={item}>{item}</li>)}</ul>
+          </article>)}
         </div>
       </section>
 
@@ -429,9 +323,36 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="intro section-shell" data-reveal>
+        <div>
+          <span className="section-label">04 / Why hire me</span>
+        </div>
+        <div className="intro-copy">
+          <p className="display-copy">I turn ambitious Roblox ideas into <em>clean, reliable systems.</em></p>
+          <div className="intro-meta">
+            <p>From a single gameplay mechanic to a connected framework, every build is structured to be readable, secure, and ready to expand.</p>
+            <div className="verified"><span>●</span><div><small>Roblox creator</small><strong>stinkybumgamer</strong></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section className="why-grid section-shell" aria-label="Why work with me">
+        {[
+          ["Full-stack ownership", "Gameplay, backend, UI, and client-side polish built as one connected experience."],
+          ["Time for your project", `${config.YEARS_EXPERIENCE} years of experience, with up to ${config.DAILY_AVAILABILITY} available for active projects. Short-term and long-term work.`],
+          ["Architecture that grows", "Modular Luau, persistent data, server-side validation, and exploit-resistant systems designed for expansion."],
+          ["A clean fit for your game", "Existing codebase integration, advanced tweening, debugging, testing, and performance optimization."]
+        ].map(([title, description], index) => <article key={title} data-reveal><span>0{index + 1}</span><h3>{title}</h3><p>{description}</p></article>)}
+      </section>
+
+      {testimonials.length > 0 && <section className="testimonials section-shell" aria-labelledby="testimonials-title">
+        <h2 id="testimonials-title">Client feedback</h2>
+        <div className="why-grid">{testimonials.map(item => <figure key={item.name + item.project}><blockquote>{item.quote}</blockquote><figcaption>{item.name} · {item.project}</figcaption></figure>)}</div>
+      </section>}
+
       <section className="process section-shell" data-reveal>
         <div className="process-heading">
-          <span className="section-label">04 / Process</span>
+          <span className="section-label">05 / Process</span>
           <h2>FROM BRIEF<br />TO BUILD.</h2>
         </div>
         <ol>
@@ -444,14 +365,15 @@ export default function Home() {
       <section className="contact" id="contact">
         <div className="contact-noise" aria-hidden="true" />
         <div className="section-shell contact-inner" data-reveal>
-          <span className="section-label section-label-light">05 / Start a project</span>
-          <h2>LET&apos;S BUILD<br />SOMETHING<br /><em>SERIOUS.</em></h2>
+          <span className="section-label section-label-light">06 / Start a project</span>
+          <h2>HAVE A ROBLOX<br />GAME YOU NEED<br /><em>BUILT?</em></h2>
           <div className="contact-grid">
-            <p>Available for Roblox scripting commissions, custom frameworks, and gameplay-system development.</p>
+            <div className="contact-copy"><p>Send me your scope, budget, and deadline and let&apos;s discuss the project.</p><span className="availability"><i /> Currently available for work</span><p className="contact-availability">Up to {config.DAILY_AVAILABILITY} for active projects.</p></div>
             <div className="discord-card">
               <span>Discord username</span>
-              <strong>renolicious</strong>
-              <button type="button" onClick={copyDiscord}>{copied ? "Copied" : "Copy username"}</button>
+              <strong>{config.DISCORD_USERNAME}</strong>
+              <button type="button" onClick={copyDiscord}>Copy username</button>
+              <span className="copy-status" role="status">{copyStatus}</span>
             </div>
             <a className="contact-arrow" href="https://discord.com/app" target="_blank" rel="noreferrer" aria-label="Open Discord">↗</a>
           </div>
@@ -460,13 +382,13 @@ export default function Home() {
 
       <footer>
         <a className="brand" href="#top"><span className="brand-mark">R</span><span>RENOLICIOUS</span></a>
-        <p>Roblox systems developer · Built for performance and scale.</p>
+        <p>Full-Stack Roblox Developer · Built for performance and scale.</p>
         <a href="#top">Back to top ↑</a>
       </footer>
     </main>
 
     {activeVideo && (
-      <div className="video-modal" role="dialog" aria-modal="true" aria-labelledby={`video-title-${activeVideo.id}`} onClick={() => setActiveVideo(null)}>
+      <dialog ref={dialogRef} className="video-modal" aria-modal="true" aria-labelledby={`video-title-${activeVideo.id}`} onCancel={() => setActiveVideo(null)} onClick={(event) => { if (event.target === event.currentTarget) setActiveVideo(null); }}>
         <div className="video-modal-panel" onClick={(event) => event.stopPropagation()}>
           <div className="video-modal-header">
             <div>
@@ -484,8 +406,9 @@ export default function Home() {
               allowFullScreen
             />
           </div>
+          <a className="video-fallback" href={`https://www.youtube.com/watch?v=${activeVideo.id}`} target="_blank" rel="noreferrer">Watch on YouTube ↗</a>
         </div>
-      </div>
+      </dialog>
     )}
     </>
   );
