@@ -2,7 +2,7 @@
 export const portfolioConfig = {
   YEARS_EXPERIENCE: "3+",
   DAILY_AVAILABILITY: "16+ Hrs/Day",
-  CLIENT_WORK_VALUE: "$2,000",
+  CLIENT_WORK_VALUE: "$2,000+",
   PROJECT_COUNT: "8+",
   DISCORD_USERNAME: "renolicious",
 };
