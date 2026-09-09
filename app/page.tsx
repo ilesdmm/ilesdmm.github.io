@@ -374,6 +374,7 @@ export default function Home() {
                 <figcaption>
                   <strong>{project.title}</strong>
                   <span>{project.detail}</span>
+                  {project.description && <p className="ui-gfx-description">{project.description}</p>}
                 </figcaption>
               </figure>
             ))}

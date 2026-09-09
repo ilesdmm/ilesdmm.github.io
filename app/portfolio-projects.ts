@@ -99,7 +99,13 @@ export const archive = [
   ["14", "Helicopter Framework", "Flight · Vehicles", "3amMD4wfaNc"],
 ];
 
-export const uiShowcase = [
+export const uiShowcase: {
+  number: string;
+  title: string;
+  detail: string;
+  image: string;
+  description?: string;
+}[] = [
   {
     number: "01",
     title: "Rebirth interface",
@@ -123,6 +129,22 @@ export const uiShowcase = [
     title: "Fantasy portfolio UI",
     detail: "Visual direction · Interface design",
     image: "/ui-gfx/portfolio-interface.png",
+  },
+  {
+    number: "05",
+    title: "Anime RPG Interface Framework",
+    detail: "Scalable HUD · Flexible visual design",
+    image: "/ui-gfx/anime-rpg-interface.png",
+    description:
+      "A scalable RPG and anime interface that brings currencies, quests, unit loadouts, and progression into one cohesive HUD. Built for easy updates and visual customization as your game's content and art direction evolve.",
+  },
+  {
+    number: "06",
+    title: "Tower Defense Interface Framework",
+    detail: "Scalable UI · Battle pass & rewards",
+    image: "/ui-gfx/tower-defense-interface.png",
+    description:
+      "A scalable tower defense interface with bold navigation, clear progression, and a dedicated battle pass and rewards layout. Designed to keep an expanding set of game features organized and easy for players to navigate.",
   },
 ];
 

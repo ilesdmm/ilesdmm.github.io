@@ -533,6 +533,9 @@ section[id] { scroll-margin-top: 28px; }
 .ui-gfx-strengths p { font-size: 16px; color: #aaa; }
 .ui-gfx-kicker,.ui-gfx-strengths article > span { font-size: 12px; }
 .ui-gfx-card figcaption > span { font-size: 12px; color: #aaa; line-height: 1.5; }
+.ui-gfx-card figcaption:has(.ui-gfx-description) { flex-direction: column; align-items: flex-start; gap: 12px; }
+.ui-gfx-card figcaption:has(.ui-gfx-description) > span { text-align: left; }
+.ui-gfx-description { margin: 4px 0 0; color: #b2b2b2; font-size: 16px; line-height: 1.65; }
 .intro { padding-block: 100px 48px; }
 .why-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 28px; padding-bottom: 90px; }
 .why-grid article { border-top: 2px solid var(--red); padding-top: 24px; }
