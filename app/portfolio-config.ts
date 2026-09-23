@@ -5,6 +5,9 @@ export const portfolioConfig = {
   CLIENT_WORK_VALUE: "$2,000+",
   PROJECT_COUNT: "8+",
   DISCORD_USERNAME: "renolicious",
+  LEGAL_NAME: "Norma Cristobal Falcasantos",
+  CONTACT_EMAIL: "normafalcasantos03@gmail.com",
+  PORTFOLIO_URL: "ilesdmm.github.io",
 };
 
 // Add only genuine client feedback. The section stays hidden while this is empty.

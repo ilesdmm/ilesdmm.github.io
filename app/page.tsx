@@ -428,21 +428,47 @@ export default function Home() {
           <h2>HAVE A ROBLOX<br />GAME YOU NEED<br /><em>BUILT?</em></h2>
           <div className="contact-grid">
             <div className="contact-copy"><p>Send me your scope, budget, and deadline and let&apos;s discuss the project.</p><span className="availability"><i /> Currently available for work</span><p className="contact-availability">Up to {config.DAILY_AVAILABILITY} for active projects.</p></div>
-            <div className="discord-card">
-              <span>Discord username</span>
-              <strong>{config.DISCORD_USERNAME}</strong>
-              <button type="button" onClick={copyDiscord}>Copy username</button>
-              <span className="copy-status" role="status">{copyStatus}</span>
-            </div>
-            <a className="contact-arrow" href="https://discord.com/app" target="_blank" rel="noreferrer" aria-label="Open Discord">↗</a>
+            <section className="professional-contact" aria-labelledby="contact-name">
+              <span className="identity-label">Professional contact</span>
+              <h3 id="contact-name">{config.LEGAL_NAME}</h3>
+              <p className="identity-role">Independent Freelance Roblox Developer</p>
+              <p className="identity-description">I provide Luau scripting, gameplay systems, backend architecture, UI implementation, optimization, and complete game development services.</p>
+              <dl className="identity-details">
+                <div className="identity-email">
+                  <dt>Email</dt>
+                  <dd><a href={`mailto:${config.CONTACT_EMAIL}`}>{config.CONTACT_EMAIL}<span aria-hidden="true"> ↗</span></a></dd>
+                </div>
+                <div className="identity-discord">
+                  <dt>Discord</dt>
+                  <dd>{config.DISCORD_USERNAME}
+                  <div className="identity-actions">
+                    <button type="button" onClick={copyDiscord}>Copy username</button>
+                    <a href="https://discord.com/app" target="_blank" rel="noreferrer">Open Discord <span aria-hidden="true">↗</span></a>
+                  </div>
+                  <span className="copy-status" role="status">{copyStatus}</span>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Portfolio</dt>
+                  <dd><a href={`https://${config.PORTFOLIO_URL}`}>{config.PORTFOLIO_URL}<span aria-hidden="true"> ↗</span></a></dd>
+                </div>
+              </dl>
+            </section>
           </div>
         </div>
       </section>
 
       <footer>
-        <a className="brand" href="#top"><span className="brand-mark">R</span><span>RENOLICIOUS</span></a>
-        <p>Full-Stack Roblox Developer · Built for performance and scale.</p>
-        <a href="#top">Back to top ↑</a>
+        <div className="footer-brand">
+          <a className="brand" href="#top"><span className="brand-mark">R</span><span>RENOLICIOUS</span></a>
+          <span>Full-Stack Roblox Developer</span>
+        </div>
+        <div className="footer-identity">
+          <span className="footer-owner">{config.LEGAL_NAME} <span>/ Ilesdm / Renolicious</span></span>
+          <span>Independent Freelance Roblox Developer</span>
+          <a href={`mailto:${config.CONTACT_EMAIL}`}>{config.CONTACT_EMAIL}</a>
+        </div>
+        <div className="footer-end"><span>© 2026 Renolicious</span><a href="#top">Back to top ↑</a></div>
       </footer>
     </main>
 
