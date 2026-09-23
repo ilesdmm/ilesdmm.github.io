@@ -464,7 +464,7 @@ export default function Home() {
           <span>Full-Stack Roblox Developer</span>
         </div>
         <div className="footer-identity">
-          <span className="footer-owner">{config.LEGAL_NAME} <span>/ Ilesdm / Renolicious</span></span>
+          <span className="footer-owner">{config.LEGAL_NAME} <span>/ Renolicious</span></span>
           <span>Independent Freelance Roblox Developer</span>
           <a href={`mailto:${config.CONTACT_EMAIL}`}>{config.CONTACT_EMAIL}</a>
         </div>
