@@ -19,8 +19,8 @@ test('replacement demos and the fourteen retained systems are rendered', () => {
   for (const id of ['ke1Bhn0ZGGc', 'xcOu7b0e5jM', 'coa5FW_ExA8']) assert.ok(!source.includes(id));
 });
 test('current claims and testimonials stay accurate', () => {
-  assert.ok(html.includes('$2,000'));
-  assert.ok(html.includes('8+'));
+  assert.ok(html.includes('$4,300'));
+  assert.ok(html.includes('<strong>15</strong>'));
   assert.ok(html.includes('Past 2 weeks'));
   assert.ok(html.includes('This month'));
   assert.ok(!html.includes('id="testimonials-title"'));
