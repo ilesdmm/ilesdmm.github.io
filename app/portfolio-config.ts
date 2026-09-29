@@ -1,16 +1,14 @@
-// Edit your public credentials here. Unknown values are deliberately placeholders.
 export const portfolioConfig = {
   YEARS_EXPERIENCE: "3+",
   DAILY_AVAILABILITY: "16+ Hrs/Day",
-  CLIENT_WORK_VALUE: "$4,300",
-  PROJECT_COUNT: "15",
+  CLIENT_WORK_VALUE: "$5,700",
+  PROJECT_COUNT: "19",
   DISCORD_USERNAME: "renolicious",
   LEGAL_NAME: "Norma Cristobal Falcasantos",
   CONTACT_EMAIL: "normafalcasantos03@gmail.com",
   PORTFOLIO_URL: "ilesdmm.github.io",
 };
 
-// Add only genuine client feedback. The section stays hidden while this is empty.
 export const testimonials: { quote: string; name: string; project: string }[] = [];
 
 export const capabilities = [

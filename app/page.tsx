@@ -33,7 +33,6 @@ function SystemPreview({ number, title, video, onOpen, paused, isPlaying }: Syst
     if (!isPlaying || !host) return;
     let cancelled = false;
     let player: PreviewPlayer | undefined;
-    // The iframe remains mounted while scrolling, pausing, or opening a demo.
     const iframe = document.createElement("iframe");
     iframe.src = `https://www.youtube-nocookie.com/embed/${video}` +
       `?enablejsapi=1&origin=${encodeURIComponent(window.location.origin)}` +
@@ -63,9 +62,7 @@ function SystemPreview({ number, title, video, onOpen, paused, isPlaying }: Syst
           },
         },
       });
-    }).catch(() => {
-      // The original muted looping embed still works if the controls API fails.
-    });
+    }).catch(() => undefined);
     return () => {
       cancelled = true;
       playerRef.current = null;
@@ -88,6 +85,7 @@ function SystemPreview({ number, title, video, onOpen, paused, isPlaying }: Syst
 }
 
 export default function Home() {
+  const heroRef = useRef<HTMLElement>(null);
   const showcaseRef = useRef<HTMLDivElement>(null);
   const [showcasePlaying, setShowcasePlaying] = useState(false);
   const [previewsPaused, setPreviewsPaused] = useState(false);
@@ -98,7 +96,6 @@ export default function Home() {
   useEffect(() => {
     const showcase = showcaseRef.current;
     if (!showcase) return;
-    // Warm up all nine players before arrival and retain them for this page visit.
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         setShowcasePlaying(true);
@@ -108,6 +105,39 @@ export default function Home() {
     observer.observe(showcase);
     return () => {
       observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+    const motionMedia = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const motionPreview = document.documentElement.dataset.motionPreview === "true";
+    let frame = 0;
+    let heroHeight = hero.offsetHeight;
+    const renderDepth = () => {
+      frame = 0;
+      const active = !motionMedia.matches || motionPreview;
+      const scroll = active ? Math.min(window.scrollY / Math.max(heroHeight, 1), 1) : 0;
+      hero.style.setProperty("--hero-front-y", `${-scroll * 12}px`);
+      hero.style.setProperty("--hero-back-y", `${-scroll * 5}px`);
+    };
+    const scheduleDepth = () => {
+      if (!frame) frame = window.requestAnimationFrame(renderDepth);
+    };
+    const onResize = () => {
+      heroHeight = hero.offsetHeight;
+      scheduleDepth();
+    };
+    window.addEventListener("scroll", scheduleDepth, { passive: true });
+    window.addEventListener("resize", onResize);
+    motionMedia.addEventListener("change", scheduleDepth);
+    scheduleDepth();
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", scheduleDepth);
+      window.removeEventListener("resize", onResize);
+      motionMedia.removeEventListener("change", scheduleDepth);
     };
   }, []);
 
@@ -187,7 +217,7 @@ export default function Home() {
         </a>
       </header>
 
-      <section className="hero" aria-labelledby="hero-title">
+      <section className="hero" aria-labelledby="hero-title" ref={heroRef}>
         <div className="hero-grid" aria-hidden="true" />
         <div className="hero-glow" aria-hidden="true" />
         <div className="hero-topline">
@@ -195,9 +225,9 @@ export default function Home() {
           <span className="hero-index">Portfolio / 2026</span>
         </div>
         <h1 id="hero-title">
-          <span>I BUILD THE</span>
-          <span className="outline">SYSTEMS BEHIND</span>
-          <span>GREAT GAMES</span>
+          <span className="hero-line hero-line-front hero-line-build"><span className="hero-line-entrance"><span className="hero-line-copy">I BUILD THE</span></span></span>
+          <span className="hero-line hero-line-back"><span className="hero-line-entrance"><span className="hero-line-copy outline">SYSTEMS BEHIND</span></span></span>
+          <span className="hero-line hero-line-front hero-line-games"><span className="hero-line-entrance"><span className="hero-line-copy">GREAT GAMES</span></span></span>
         </h1>
         <div className="hero-bottom">
           <div className="hero-description"><p className="hero-promise">I build complete, production-ready Roblox games and systems.</p><p>From backend architecture and gameplay to polished UI, tweening, GFX, monetization, and optimization.</p></div>
