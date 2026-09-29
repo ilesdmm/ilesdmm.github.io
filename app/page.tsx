@@ -112,12 +112,11 @@ export default function Home() {
     const hero = heroRef.current;
     if (!hero) return;
     const motionMedia = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const motionPreview = document.documentElement.dataset.motionPreview === "true";
     let frame = 0;
     let heroHeight = hero.offsetHeight;
     const renderDepth = () => {
       frame = 0;
-      const active = !motionMedia.matches || motionPreview;
+      const active = !motionMedia.matches;
       const scroll = active ? Math.min(window.scrollY / Math.max(heroHeight, 1), 1) : 0;
       hero.style.setProperty("--hero-front-y", `${-scroll * 12}px`);
       hero.style.setProperty("--hero-back-y", `${-scroll * 5}px`);

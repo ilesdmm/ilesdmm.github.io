@@ -682,21 +682,12 @@ footer { grid-template-columns: 1fr 1.6fr auto; padding-block: 28px; font-size: 
 @keyframes hero-games-mobile { from { opacity: .35; transform: translateX(60px); clip-path: inset(0 0 0 100%); } to { opacity: 1; transform: none; clip-path: inset(0); } }
 @media (prefers-reduced-motion: reduce) {
   .hero .hero-line, .hero .hero-line-entrance, .hero .hero-line-copy, .hero .hero-index, .hero .hero-description p, .hero .hero-actions a, .hero .eyebrow i { animation: none !important; opacity: 1; transform: none; clip-path: none; text-shadow: none; }
-  html[data-motion-preview="true"] .hero .hero-line-front { transform: translate3d(0, var(--hero-front-y, 0px), 0); }
-  html[data-motion-preview="true"] .hero .hero-line-back { transform: translate3d(0, var(--hero-back-y, 0px), 0); }
-  html[data-motion-preview="true"] .hero .hero-line-build .hero-line-entrance { animation: hero-build-in .76s cubic-bezier(.18, .82, .2, 1) .08s both !important; }
-  html[data-motion-preview="true"] .hero .hero-line-back .hero-line-entrance { animation: hero-systems-in 1.12s cubic-bezier(.22, .72, .22, 1) .56s both !important; }
-  html[data-motion-preview="true"] .hero .hero-line-games .hero-line-entrance { animation: hero-games-in .84s cubic-bezier(.18, .82, .2, 1) 1.17s both !important; }
-  html[data-motion-preview="true"] .hero .hero-line-front .hero-line-copy { animation: hero-glow-settle 2.4s ease-out .08s both !important; }
-  html[data-motion-preview="true"] .hero .hero-index { animation: hero-index-in .6s ease-out .38s both !important; }
-  html[data-motion-preview="true"] .hero .hero-description .hero-promise { animation: hero-support-in .55s ease-out 1.56s both !important; }
-  html[data-motion-preview="true"] .hero .hero-description p:last-child { animation: hero-support-in .55s ease-out 1.68s both !important; }
-  html[data-motion-preview="true"] .hero .hero-actions .button { animation: hero-support-in .55s ease-out 1.79s both !important; }
-  html[data-motion-preview="true"] .hero .hero-actions .text-link { animation: hero-support-in .55s ease-out 1.9s both !important; }
-  html[data-motion-preview="true"] .hero .eyebrow i { animation: hero-availability-pulse 5s ease-in-out 2.1s infinite !important; }
+  .hero .hero-line-build .hero-line-entrance { animation: hero-build-in .76s cubic-bezier(.18, .82, .2, 1) .08s both !important; }
+  .hero .hero-line-back .hero-line-entrance { animation: hero-systems-in 1.12s cubic-bezier(.22, .72, .22, 1) .56s both !important; }
+  .hero .hero-line-games .hero-line-entrance { animation: hero-games-in .84s cubic-bezier(.18, .82, .2, 1) 1.17s both !important; }
 }
 @media (prefers-reduced-motion: reduce) and (max-width: 650px) {
-  html[data-motion-preview="true"] .hero .hero-line-build .hero-line-entrance { animation-name: hero-build-mobile !important; }
-  html[data-motion-preview="true"] .hero .hero-line-back .hero-line-entrance { animation-name: hero-systems-mobile !important; }
-  html[data-motion-preview="true"] .hero .hero-line-games .hero-line-entrance { animation-name: hero-games-mobile !important; }
+  .hero .hero-line-build .hero-line-entrance { animation-name: hero-build-mobile !important; }
+  .hero .hero-line-back .hero-line-entrance { animation-name: hero-systems-mobile !important; }
+  .hero .hero-line-games .hero-line-entrance { animation-name: hero-games-mobile !important; }
 }
