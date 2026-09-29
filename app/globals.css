@@ -656,7 +656,7 @@ footer { grid-template-columns: 1fr 1.6fr auto; padding-block: 28px; font-size: 
 .hero h1 .hero-line-build .hero-line-entrance { animation: hero-build-in .76s cubic-bezier(.18, .82, .2, 1) .08s both; }
 .hero h1 .hero-line-back .hero-line-entrance { animation: hero-systems-in 1.12s cubic-bezier(.22, .72, .22, 1) .56s both; }
 .hero h1 .hero-line-games .hero-line-entrance { animation: hero-games-in .84s cubic-bezier(.18, .82, .2, 1) 1.17s both; }
-.hero h1 .hero-line-front .hero-line-copy { color: #fff; -webkit-text-stroke: clamp(1px, .14vw, 2.5px) var(--red); paint-order: stroke fill; filter: drop-shadow(.035em .035em 0 #8e0710) drop-shadow(.045em .05em .12em rgba(239, 27, 36, .3)); animation: hero-glow-settle 2.4s ease-out .08s both; }
+.hero h1 .hero-line-front .hero-line-copy { color: #c7c2b9; -webkit-text-stroke: clamp(1px, .14vw, 2.5px) #554e4e; paint-order: stroke fill; filter: drop-shadow(.028em .035em 0 #241c1d); }
 .hero .hero-index { animation: hero-index-in .6s ease-out .38s both; }
 .hero .hero-description .hero-promise { animation: hero-support-in .55s ease-out 1.56s both; }
 .hero .hero-description p:last-child { animation: hero-support-in .55s ease-out 1.68s both; }
@@ -666,7 +666,6 @@ footer { grid-template-columns: 1fr 1.6fr auto; padding-block: 28px; font-size: 
 @keyframes hero-build-in { from { opacity: .35; transform: translate3d(-140px, 0, 0); clip-path: inset(0 100% 0 0); } to { opacity: 1; transform: translateZ(0); clip-path: inset(0); } }
 @keyframes hero-systems-in { from { opacity: 0; transform: translate3d(-24px, -.32em, 0); } to { opacity: 1; transform: translateZ(0); } }
 @keyframes hero-games-in { from { opacity: .35; transform: translate3d(160px, 0, 0); clip-path: inset(0 0 0 100%); } to { opacity: 1; transform: translateZ(0); clip-path: inset(0); } }
-@keyframes hero-glow-settle { 0%, 72% { text-shadow: 0 2px 18px rgba(140, 8, 15, .22); } 100% { text-shadow: 0 0 2px rgba(140, 8, 15, .08); } }
 @keyframes hero-index-in { from { opacity: 0; transform: translateX(18px); } to { opacity: 1; transform: none; } }
 @keyframes hero-support-in { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: none; } }
 @keyframes hero-availability-pulse { 0%, 100% { box-shadow: 0 0 0 5px rgba(239, 27, 36, .1); } 50% { box-shadow: 0 0 0 8px rgba(239, 27, 36, .04); } }
