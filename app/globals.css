@@ -656,7 +656,7 @@ footer { grid-template-columns: 1fr 1.6fr auto; padding-block: 28px; font-size: 
 .hero h1 .hero-line-build .hero-line-entrance { animation: hero-build-in .76s cubic-bezier(.18, .82, .2, 1) .08s both; }
 .hero h1 .hero-line-back .hero-line-entrance { animation: hero-systems-in 1.12s cubic-bezier(.22, .72, .22, 1) .56s both; }
 .hero h1 .hero-line-games .hero-line-entrance { animation: hero-games-in .84s cubic-bezier(.18, .82, .2, 1) 1.17s both; }
-.hero h1 .hero-line-front .hero-line-copy { color: #fff; animation: hero-glow-settle 2.4s ease-out .08s both; }
+.hero h1 .hero-line-front .hero-line-copy { color: #fff; -webkit-text-stroke: clamp(1px, .14vw, 2.5px) var(--red); paint-order: stroke fill; filter: drop-shadow(.035em .035em 0 #8e0710) drop-shadow(.045em .05em .12em rgba(239, 27, 36, .3)); animation: hero-glow-settle 2.4s ease-out .08s both; }
 .hero .hero-index { animation: hero-index-in .6s ease-out .38s both; }
 .hero .hero-description .hero-promise { animation: hero-support-in .55s ease-out 1.56s both; }
 .hero .hero-description p:last-child { animation: hero-support-in .55s ease-out 1.68s both; }
