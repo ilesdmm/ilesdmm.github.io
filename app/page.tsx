@@ -224,9 +224,9 @@ export default function Home() {
           <span className="hero-index">Portfolio / 2026</span>
         </div>
         <h1 id="hero-title">
-          <span className="hero-line hero-line-front hero-line-build"><span className="hero-line-entrance"><span className="hero-line-copy">I BUILD THE</span></span></span>
+          <span className="hero-line hero-line-front hero-line-build"><span className="hero-line-entrance"><span className="hero-line-copy"><span className="hero-line-outline" aria-hidden="true">I BUILD THE</span>I BUILD THE</span></span></span>
           <span className="hero-line hero-line-back"><span className="hero-line-entrance"><span className="hero-line-copy outline">SYSTEMS BEHIND</span></span></span>
-          <span className="hero-line hero-line-front hero-line-games"><span className="hero-line-entrance"><span className="hero-line-copy">GREAT GAMES</span></span></span>
+          <span className="hero-line hero-line-front hero-line-games"><span className="hero-line-entrance"><span className="hero-line-copy"><span className="hero-line-outline" aria-hidden="true">GREAT GAMES</span>GREAT GAMES</span></span></span>
         </h1>
         <div className="hero-bottom">
           <div className="hero-description"><p className="hero-promise">I build complete, production-ready Roblox games and systems.</p><p>From backend architecture and gameplay to polished UI, tweening, GFX, monetization, and optimization.</p></div>
