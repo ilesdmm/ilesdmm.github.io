@@ -7,15 +7,15 @@ test('public portfolio keeps its navigation targets and gallery assets', () => {
   for (const match of html.matchAll(/src="(\/ui-gfx\/[^"?]+)"/g)) assert.ok(existsSync(`out${match[1]}`), match[1]);
   assert.ok(html.includes('https://discord.com/app'));
 });
-test('replacement demos and the fourteen retained systems are rendered', () => {
+test('twelve featured previews and sixteen systems are rendered', () => {
   assert.ok(html.includes('AI AGGRO &amp; ZONE DETECTION SYSTEM'));
   assert.ok(html.includes('ROUND &amp; ROLE SYSTEM'));
   assert.ok(!html.includes('Player Movement System'));
   assert.ok(html.includes('Dynamic Movement System'));
-  assert.equal((html.match(/class="project project-dark"/g) || []).length, 9);
-  assert.ok(html.includes('More systems / 10—14'));
+  assert.equal((html.match(/class="project project-dark"/g) || []).length, 12);
+  assert.ok(html.replaceAll('<!-- -->', '').includes('More systems / 13—16'));
   const source = readFileSync('app/portfolio-projects.ts', 'utf8');
-  for (const id of ['xkzckJU9c6g', 'h4Un0kK6uOg']) assert.ok(source.includes(id));
+  for (const id of ['xkzckJU9c6g', 'h4Un0kK6uOg', 'rhJFSWRuO5E', 'ERt8fXCf24Q']) assert.ok(source.includes(id));
   for (const id of ['ke1Bhn0ZGGc', 'xcOu7b0e5jM', 'coa5FW_ExA8']) assert.ok(!source.includes(id));
 });
 test('current claims and testimonials stay accurate', () => {

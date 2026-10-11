@@ -89,14 +89,40 @@ export const featuredProjects = [
     video: "l5_eO186u6c",
     accent: "dark",
   },
+  {
+    number: "10",
+    title: "Pet & Income System",
+    category: "Pets · Income",
+    description: "A pet and income gameplay showcase connecting collection with earning rewards.",
+    skills: ["Pet systems", "Income mechanics", "Gameplay integration"],
+    video: "rhJFSWRuO5E",
+    accent: "dark",
+  },
+  {
+    number: "11",
+    title: "Steal an Egg System — Jetpack Version",
+    category: "Eggs · Jetpacks",
+    description: "An egg-stealing gameplay showcase with jetpack movement connecting traversal and the core game loop.",
+    skills: ["Egg-stealing gameplay", "Jetpack movement", "Game loop"],
+    video: "ERt8fXCf24Q",
+    accent: "dark",
+  },
+  {
+    number: "12",
+    title: "ROUND & ROLE SYSTEM",
+    category: "Rounds · Roles",
+    description: "A connected round and role framework for organizing match flow and player roles.",
+    skills: ["Round management", "Player roles", "Match flow"],
+    video: "h4Un0kK6uOg",
+    accent: "dark",
+  },
 ];
 
 export const archive = [
-  ["10", "AI AGGRO & ZONE DETECTION SYSTEM", "AI · Zone detection", "xkzckJU9c6g"],
-  ["11", "Inventory UI Framework", "Inventory · UI", "0Tv6my4FM0w"],
-  ["12", "Looting + Backpack", "Loot · Equipment", "cZyyWepvBCc"],
-  ["13", "ROUND & ROLE SYSTEM", "Rounds · Roles", "h4Un0kK6uOg"],
-  ["14", "Helicopter Framework", "Flight · Vehicles", "3amMD4wfaNc"],
+  ["13", "AI AGGRO & ZONE DETECTION SYSTEM", "AI · Zone detection", "xkzckJU9c6g"],
+  ["14", "Inventory UI Framework", "Inventory · UI", "0Tv6my4FM0w"],
+  ["15", "Looting + Backpack", "Loot · Equipment", "cZyyWepvBCc"],
+  ["16", "Helicopter Framework", "Flight · Vehicles", "3amMD4wfaNc"],
 ];
 
 export const uiShowcase: {
@@ -120,9 +146,9 @@ export const uiShowcase: {
   },
   {
     number: "03",
-    title: "Jump upgrades",
-    detail: "Upgrade UI · Custom icon set",
-    image: "/ui-gfx/jump-upgrades-interface.png",
+    title: "Gamepass shop",
+    detail: "Storefront UI · Gamepasses & bundles",
+    image: "/ui-gfx/gamepass-shop-interface.png",
   },
   {
     number: "04",
@@ -132,19 +158,15 @@ export const uiShowcase: {
   },
   {
     number: "05",
-    title: "Anime RPG Interface Framework",
-    detail: "Scalable HUD · Flexible visual design",
-    image: "/ui-gfx/anime-rpg-interface.png",
-    description:
-      "A scalable RPG and anime interface that brings currencies, quests, unit loadouts, and progression into one cohesive HUD. Built for easy updates and visual customization as your game's content and art direction evolve.",
+    title: "Magnet shop",
+    detail: "Equipment UI · Custom magnet icons",
+    image: "/ui-gfx/magnet-shop-interface.png",
   },
   {
     number: "06",
-    title: "Tower Defense Interface Framework",
-    detail: "Scalable UI · Battle pass & rewards",
-    image: "/ui-gfx/tower-defense-interface.png",
-    description:
-      "A scalable tower defense interface with bold navigation, clear progression, and a dedicated battle pass and rewards layout. Designed to keep an expanding set of game features organized and easy for players to navigate.",
+    title: "Pet index",
+    detail: "Collection UI · Island collections & rarity",
+    image: "/ui-gfx/pet-index-interface.png",
   },
 ];
 

@@ -335,8 +335,8 @@ export default function Home() {
 
         <div className="archive section-shell" data-reveal>
           <div className="archive-heading">
-            <span className="section-label">More systems / 10—14</span>
-            <p>Five more builds across AI, UI, equipment, game flow, and vehicles.</p>
+            <span className="section-label">More systems / {archive[0][0]}—{archive[archive.length - 1][0]}</span>
+            <p>{archive.length} more builds across AI, UI, equipment, and vehicles.</p>
           </div>
           <div className="archive-list">
             {archive.map(([number, title, category, video]) => (
