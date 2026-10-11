@@ -19,11 +19,11 @@ test('twelve featured previews and sixteen systems are rendered', () => {
   for (const id of ['ke1Bhn0ZGGc', 'xcOu7b0e5jM', 'coa5FW_ExA8']) assert.ok(!source.includes(id));
 });
 test('current claims and testimonials stay accurate', () => {
-  assert.ok(html.includes('$5,700'));
-  assert.ok(html.includes('<strong>19</strong>'));
+  assert.ok(html.includes('$8,200'));
+  assert.ok(html.includes('<strong>31</strong>'));
   assert.ok(html.includes('Past 2 weeks'));
   assert.ok(html.includes('This month'));
   assert.ok(!html.includes('id="testimonials-title"'));
-  assert.ok(html.includes('3+'));
+  assert.ok(html.includes('4+'));
   assert.ok(html.includes('16+ Hrs/Day'));
 });

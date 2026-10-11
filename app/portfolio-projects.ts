@@ -100,7 +100,7 @@ export const featuredProjects = [
   },
   {
     number: "11",
-    title: "Steal an Egg System — Jetpack Version",
+    title: "STEAL AN EGG SYSTEM (JETPACK VERSION)",
     category: "Eggs · Jetpacks",
     description: "An egg-stealing gameplay showcase with jetpack movement connecting traversal and the core game loop.",
     skills: ["Egg-stealing gameplay", "Jetpack movement", "Game loop"],

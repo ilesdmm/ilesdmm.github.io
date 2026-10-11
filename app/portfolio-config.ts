@@ -1,8 +1,8 @@
 export const portfolioConfig = {
-  YEARS_EXPERIENCE: "3+",
+  YEARS_EXPERIENCE: "4+",
   DAILY_AVAILABILITY: "16+ Hrs/Day",
-  CLIENT_WORK_VALUE: "$5,700",
-  PROJECT_COUNT: "19",
+  CLIENT_WORK_VALUE: "$8,200",
+  PROJECT_COUNT: "31",
   DISCORD_USERNAME: "renolicious",
   LEGAL_NAME: "Norma Cristobal Falcasantos",
   CONTACT_EMAIL: "normafalcasantos03@gmail.com",
