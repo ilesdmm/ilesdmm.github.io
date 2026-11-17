@@ -3,19 +3,18 @@
 import { useEffect, useRef, useState } from "react";
 import { portfolioConfig as config, capabilities, testimonials } from "./portfolio-config";
 
-import { featuredProjects, archive, uiShowcase } from "./portfolio-projects";
+import { featuredProjects, archive, uiShowcase, buildingShowcase } from "./portfolio-projects";
 import { loadYouTubeAPI, type PreviewPlayer } from "./youtube-api";
 
 type SystemPreviewProps = {
   number: string;
   title: string;
   video: string;
-  onOpen: () => void;
   paused: boolean;
   isPlaying: boolean;
 };
 
-function SystemPreview({ number, title, video, onOpen, paused, isPlaying }: SystemPreviewProps) {
+function SystemPreview({ number, title, video, paused, isPlaying }: SystemPreviewProps) {
   const playerHost = useRef<HTMLDivElement>(null);
   const playerRef = useRef<PreviewPlayer | null>(null);
   const pauseRef = useRef(paused);
@@ -76,10 +75,7 @@ function SystemPreview({ number, title, video, onOpen, paused, isPlaying }: Syst
       <img src={`https://i.ytimg.com/vi/${video}/hqdefault.jpg`} alt="" loading="lazy" width="480" height="360" />
       <div ref={playerHost} />
       <span className="media-shade" aria-hidden="true" />
-      <button className="project-preview-button" type="button" onClick={onOpen} aria-label={`Watch ${title} with sound`}>
-        <span className="play-button">VIEW WITH SOUND <b>▶</b></span>
-        <span className="project-number">{number}</span>
-      </button>
+      <span className="project-number" aria-hidden="true">{number}</span>
     </div>
   );
 }
@@ -209,6 +205,7 @@ export default function Home() {
           <a href="#work">Work</a>
           <a href="#build">Capabilities</a>
           <a href="#capabilities">UI / GFX</a>
+          <a href="#building">Building / 3D</a>
           <a href="#contact">Contact</a>
         </nav>
         <a className="header-cta" href="#contact">
@@ -318,7 +315,6 @@ export default function Home() {
                 number={project.number}
                 title={project.title}
                 video={project.video}
-                onOpen={() => setActiveVideo({ id: project.video, title: project.title })}
               />
               <div className="project-content">
                 <p className="project-category">{project.category}</p>
@@ -411,26 +407,42 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="intro section-shell" data-reveal>
-        <div>
-          <span className="section-label">04 / Why hire me</span>
-        </div>
-        <div className="intro-copy">
-          <p className="display-copy">I turn ambitious Roblox ideas into <em>clean, reliable systems.</em></p>
-          <div className="intro-meta">
-            <p>From a single gameplay mechanic to a connected framework, every build is structured to be readable, secure, and ready to expand.</p>
-            <div className="verified"><span>●</span><div><small>Roblox creator</small><strong>stinkybumgamer</strong></div></div>
+      <section className="building-section section-shell" id="building" aria-labelledby="building-title">
+        <div className="section-heading" data-reveal>
+          <span className="section-label">04 / Building + Modeling</span>
+          <div>
+            <h2 id="building-title">WORLDS BUILT.<br /><em>DETAILS MODELED.</em></h2>
+            <p>I&apos;m a Roblox builder and 3D modeler, too. I create environments, props, furniture, and character assets, bringing the same attention to the world players see as the systems behind it.</p>
           </div>
         </div>
-      </section>
-
-      <section className="why-grid section-shell" aria-label="Why work with me">
-        {[
-          ["Full-stack ownership", "Gameplay, backend, UI, and client-side polish built as one connected experience."],
-          ["Time for your project", `${config.YEARS_EXPERIENCE} years of experience, with up to ${config.DAILY_AVAILABILITY} available for active projects. Short-term and long-term work.`],
-          ["Architecture that grows", "Modular Luau, persistent data, server-side validation, and exploit-resistant systems designed for expansion."],
-          ["A clean fit for your game", "Existing codebase integration, advanced tweening, debugging, testing, and performance optimization."]
-        ].map(([title, description], index) => <article key={title} data-reveal><span>0{index + 1}</span><h3>{title}</h3><p>{description}</p></article>)}
+        <div className="building-disciplines" data-reveal>
+          <article>
+            <span className="section-label">01 / Builder</span>
+            <h3>Spaces with character.</h3>
+            <p>From simulator hubs to themed islands, I build layouts, scenery, and set dressing that give each area its own identity.</p>
+          </article>
+          <article>
+            <span className="section-label">02 / Modeler</span>
+            <h3>Details that belong.</h3>
+            <p>I model furniture, environment props, insignia, and equipment, from individual pieces to coordinated asset collections.</p>
+          </article>
+        </div>
+        <div className="ui-gfx-gallery building-gallery">
+          {buildingShowcase.map((project) => (
+            <figure className="ui-gfx-card building-card" key={project.number} data-reveal>
+              <a className="ui-gfx-image" href={project.image} target="_blank" rel="noreferrer" aria-label={`View ${project.title} full size`}>
+                <img src={project.image} alt={project.alt} loading="lazy" width={project.width} height={project.height} />
+                <span aria-hidden="true">{project.number}</span>
+              </a>
+              <figcaption>
+                <span>{project.detail}</span>
+                <strong>{project.title}</strong>
+                <p className="ui-gfx-description">{project.description}</p>
+                <a className="building-image-link" href={project.image} target="_blank" rel="noreferrer">View full image <span aria-hidden="true">↗</span></a>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
       </section>
 
       {testimonials.length > 0 && <section className="testimonials section-shell" aria-labelledby="testimonials-title">
@@ -491,11 +503,6 @@ export default function Home() {
         <div className="footer-brand">
           <a className="brand" href="#top"><span className="brand-mark">R</span><span>RENOLICIOUS</span></a>
           <span>Full-Stack Roblox Developer</span>
-        </div>
-        <div className="footer-identity">
-          <span className="footer-owner">{config.LEGAL_NAME} <span>/ Renolicious</span></span>
-          <span>Independent Freelance Roblox Developer</span>
-          <a href={`mailto:${config.CONTACT_EMAIL}`}>{config.CONTACT_EMAIL}</a>
         </div>
         <div className="footer-end"><span>© 2026 Renolicious</span><a href="#top">Back to top ↑</a></div>
       </footer>
