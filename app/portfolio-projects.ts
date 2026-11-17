@@ -173,16 +173,6 @@ export const uiShowcase: {
 export const buildingShowcase = [
   {
     number: "01",
-    title: "Three-seat chair model",
-    detail: "3D modeling · Solid + wireframe",
-    image: "/building-modeling/chair-model.png",
-    alt: "Three connected chairs in Blender, showing the solid model below and wireframe topology above",
-    width: 962,
-    height: 648,
-    description: "A connected seating model, shown in solid and wireframe views for a closer look at the shape and topology.",
-  },
-  {
-    number: "02",
     title: "Simulator plaza",
     detail: "Environment building · Hub layout",
     image: "/building-modeling/simulator-plaza.png",
@@ -192,7 +182,7 @@ export const buildingShowcase = [
     description: "A bright central hub with shops, a castle, pathways, and coordinated scenery around the main plaza.",
   },
   {
-    number: "03",
+    number: "02",
     title: "Themed island environments",
     detail: "Environment building · Seasonal worlds",
     image: "/building-modeling/themed-islands.png",
@@ -202,7 +192,7 @@ export const buildingShowcase = [
     description: "Distinct island themes brought together through scenery, props, and color, from Halloween details to snowy landscapes.",
   },
   {
-    number: "04",
+    number: "03",
     title: "Environment prop collection",
     detail: "3D modeling · Coordinated asset sets",
     image: "/building-modeling/environment-props.png",
@@ -212,7 +202,7 @@ export const buildingShowcase = [
     description: "A collection of trees, wooden scenery, lava formations, and sci-fi structures for different world styles.",
   },
   {
-    number: "05",
+    number: "04",
     title: "Rank insignia & badges",
     detail: "3D modeling · Uniform details",
     image: "/building-modeling/rank-insignia.png",
@@ -222,7 +212,7 @@ export const buildingShowcase = [
     description: "Detailed rank pieces and badge variations that carry a consistent visual language across a uniform collection.",
   },
   {
-    number: "06",
+    number: "05",
     title: "Uniform & equipment sets",
     detail: "Character assets · Roleplay",
     image: "/building-modeling/uniform-equipment.png",
@@ -230,6 +220,16 @@ export const buildingShowcase = [
     width: 1917,
     height: 840,
     description: "Coordinated roleplay outfits and equipment, including formal uniforms, patrol looks, and tactical loadouts.",
+  },
+  {
+    number: "06",
+    title: "Three-seat chair model",
+    detail: "3D modeling · Solid + wireframe",
+    image: "/building-modeling/chair-model.png",
+    alt: "Three connected chairs in Blender, showing the solid model below and wireframe topology above",
+    width: 962,
+    height: 648,
+    description: "A connected seating model, shown in solid and wireframe views for a closer look at the shape and topology.",
   },
 ];
 

@@ -537,10 +537,10 @@ section[id] { scroll-margin-top: 28px; }
 .building-card figcaption > span { text-align: left; }
 .building-card figcaption strong { line-height: 1.1; }
 .building-card .ui-gfx-image:focus-visible { outline: 2px solid var(--red); outline-offset: -4px; }
-.building-card:first-child,.building-card:last-child { display: grid; grid-template-columns: 1.4fr 1fr; grid-column: 1 / -1; }
-.building-card:first-child .ui-gfx-image { aspect-ratio: 962/648; }
-.building-card:last-child .ui-gfx-image { aspect-ratio: 1917/840; }
-.building-card:first-child figcaption,.building-card:last-child figcaption { justify-content: center; padding: clamp(24px,4vw,56px); border-top: 0; border-left: 1px solid #282828; }
+.building-card:nth-last-child(-n+2) { display: grid; grid-template-columns: 1.4fr 1fr; grid-column: 1 / -1; }
+.building-card:nth-last-child(2) .ui-gfx-image { aspect-ratio: 1917/840; }
+.building-card:last-child .ui-gfx-image { aspect-ratio: 962/648; }
+.building-card:nth-last-child(-n+2) figcaption { justify-content: center; padding: clamp(24px,4vw,56px); border-top: 0; border-left: 1px solid #282828; }
 .building-image-link { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; color: #ff757b; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .building-image-link:hover { color: white; }
 .intro { padding-block: 100px 48px; }
@@ -635,8 +635,8 @@ footer { grid-template-columns: 1fr auto; padding-block: 28px; font-size: 12px; 
   .why-grid { grid-template-columns: 1fr; gap: 24px; padding-bottom: 60px; }
   .build-section,.ui-gfx,.building-section { padding-block: 72px; }
   .building-disciplines { grid-template-columns: 1fr; gap: 28px; }
-  .building-card:first-child,.building-card:last-child { display: block; }
-  .building-card:first-child figcaption,.building-card:last-child figcaption { border-left: 0; border-top: 1px solid #282828; padding: 24px 20px; }
+  .building-card:nth-last-child(-n+2) { display: block; }
+  .building-card:nth-last-child(-n+2) figcaption { border-left: 0; border-top: 1px solid #282828; padding: 24px 20px; }
   .intro { padding-block: 72px 40px; }
   .display-copy { font-size: 40px; }
   .archive-list button { grid-template-columns: 28px minmax(0,1fr) 18px; gap: 12px; }
